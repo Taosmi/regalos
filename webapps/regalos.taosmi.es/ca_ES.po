@@ -1,0 +1,325 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Taosmi Regalos\n"
+"POT-Creation-Date: 2017-07-23 11:08+0200\n"
+"PO-Revision-Date: 2017-07-23 11:09+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ca_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.2\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: ;_e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: views/changePassword.php:4 views/gift.php:4 views/index.php:4
+#: views/index.php:12 views/index.php:16 views/news.php:4 views/options.php:4
+#: views/recoverPassword.php:4 views/recoverPassword.php:12
+#: views/register.php:4 views/register.php:12 views/shopList.php:4
+msgid "TAOSMI Regalos"
+msgstr "TAOSMI Regalos"
+
+#: views/changePassword.php:4 views/options.php:73
+msgid "Change password"
+msgstr "Baratar contrasenya"
+
+#: views/changePassword.php:14
+msgid "Change your TAOSMI Regalos password"
+msgstr "Baratar contrasenya de TAOSMI Regalos"
+
+#: views/changePassword.php:18
+msgid ""
+"Enter a new password. Please try to use a password with a enough sense of "
+"randomness that a little boy could not ever guess."
+msgstr ""
+"Introdueix una nova contrasenya. Per favor, intenta que aquesta nova "
+"contrasenya sigui mínimament aleatòria perquè un nounat no l'endevini."
+
+#: views/changePassword.php:21 views/index.php:32 views/register.php:51
+msgid "Password"
+msgstr "Contrasenya"
+
+#: views/changePassword.php:23 views/register.php:53
+msgid "Repeat the password"
+msgstr "Repetesqui sa contrasenya"
+
+#: views/changePassword.php:27
+msgid "Change"
+msgstr "Baratar"
+
+#: views/changePassword.php:28
+msgid "Go back to Options"
+msgstr "Tornar a ses Opcions"
+
+#: views/gift.php:4
+msgid "Gift"
+msgstr "Present"
+
+#: views/gift.php:14
+msgid "Gift Manipulation"
+msgstr "Edició de Presents"
+
+#: views/gift.php:22
+msgid "Title"
+msgstr "Títol"
+
+#: views/gift.php:26
+msgid "Description"
+msgstr "Descripció"
+
+#: views/gift.php:27 views/gift.php:43
+msgid "Optional"
+msgstr "Opcional"
+
+#: views/gift.php:32
+msgid "Image"
+msgstr "Imatge"
+
+#: views/gift.php:35
+msgid "From file"
+msgstr "Des de fitxer"
+
+#: views/gift.php:36
+msgid "Please copy the URL of the image:"
+msgstr "Copiï aquí s'URL de s'imatge:"
+
+#: views/gift.php:36
+msgid "From URL"
+msgstr "Des de URL"
+
+#: views/gift.php:42
+msgid "Link"
+msgstr "Enllaç"
+
+#: views/gift.php:46
+msgid "Privacy"
+msgstr "Privacitat"
+
+#: views/gift.php:48
+msgid "Public, everyone can see it"
+msgstr "Públic, tots poden veure-ho"
+
+#: views/gift.php:50
+msgid "Private, only your friends can see it"
+msgstr "Privat, només es teus amics poden veure-ho"
+
+#: views/gift.php:55 views/options.php:72
+msgid "Save"
+msgstr "Guardar"
+
+#: views/gift.php:56
+msgid "Remove"
+msgstr "Esborrar"
+
+#: views/gift.php:57
+msgid "Back to Wish List"
+msgstr "Tornar a sa llista de desitjos"
+
+#: views/index.php:30 views/options.php:26 views/recoverPassword.php:23
+#: views/register.php:24
+msgid "Email"
+msgstr "Correu electrònic"
+
+#: views/index.php:36 viewsPatterns/header.php:10
+msgid "Login"
+msgstr "Login"
+
+#: views/index.php:37
+msgid "Forgot my password"
+msgstr "Vaig descuidar sa meva contrasenya"
+
+#: views/index.php:41
+msgid "Join TAOSMI Regalos"
+msgstr "Uneix-te a TAOSMI Regalos"
+
+#: views/index.php:42
+msgid "Sign up for free"
+msgstr "Registra't gratis"
+
+#: views/news.php:4 views/news.php:14
+msgid "Recent community activity"
+msgstr "Activitat recent"
+
+#: views/news.php:19
+msgid "All users"
+msgstr "Tots ets usuaris"
+
+#: views/news.php:21 views/shopList.php:22
+msgid "Loading, please wait..."
+msgstr "Carregant, per favor esperi..."
+
+#: views/news.php:26 views/news.php:39 views/news.php:52 views/shopList.php:29
+msgid "Seen here"
+msgstr "Vist aquí"
+
+#: views/options.php:4 views/options.php:14 viewsPatterns/header.php:12
+msgid "Options"
+msgstr "Opcions"
+
+#: views/options.php:22 views/register.php:22
+msgid "Name"
+msgstr "Nom"
+
+#: views/options.php:30 views/register.php:26
+msgid "Birthday"
+msgstr "Aniversari"
+
+#: views/options.php:37 views/register.php:33
+msgid "January"
+msgstr "Gener"
+
+#: views/options.php:38 views/register.php:34
+msgid "February"
+msgstr "Febrer"
+
+#: views/options.php:39 views/register.php:35
+msgid "March"
+msgstr "Març"
+
+#: views/options.php:40 views/register.php:36
+msgid "April"
+msgstr "Abril"
+
+#: views/options.php:41 views/register.php:37
+msgid "May"
+msgstr "Maig"
+
+#: views/options.php:42 views/register.php:38
+msgid "June"
+msgstr "Juny"
+
+#: views/options.php:43 views/register.php:39
+msgid "July"
+msgstr "Juliol"
+
+#: views/options.php:44 views/register.php:40
+msgid "August"
+msgstr "Agost"
+
+#: views/options.php:45 views/register.php:41
+msgid "September"
+msgstr "Setembre"
+
+#: views/options.php:46 views/register.php:42
+msgid "October"
+msgstr "Octubre"
+
+#: views/options.php:47 views/register.php:43
+msgid "November"
+msgstr "Novembre"
+
+#: views/options.php:48 views/register.php:44
+msgid "December"
+msgstr "Desembre"
+
+#: views/options.php:59
+msgid "Avatar"
+msgstr "Avatar"
+
+#: views/options.php:62
+msgid "Change avatar"
+msgstr "Baratar s'avatar"
+
+#: views/options.php:69
+msgid "You agree to our Terms of Service and Privacy Policy"
+msgstr "Està d'acord amb sos termes de servici i política de privacitat"
+
+#: views/recoverPassword.php:4
+msgid "Recover password"
+msgstr "Recuperar contrasenya"
+
+#: views/recoverPassword.php:16
+msgid "Recover your TAOSMI Regalos password"
+msgstr "Recupera sa teva contrasenya de TAOSMI Regalos"
+
+#: views/recoverPassword.php:20
+msgid ""
+"Enter your email address used to sign up in TAOSMI Regalos. You will receive "
+"an email with your password."
+msgstr ""
+"Indica es correu electrònic que uses per registrar-te en TAOSMI Regalos per "
+"rebre un correu amb sa teva contrasenya."
+
+#: views/recoverPassword.php:27
+msgid "Recover"
+msgstr "Recuperar"
+
+#: views/recoverPassword.php:28
+msgid "I don't know what I am doing"
+msgstr "No sé que estic fent"
+
+#: views/recoverPassword.php:31
+msgid ""
+"If you are not able to remember the email address used to sign up in TAOSMI "
+"Regalos, for reasons that doesn't mind right now, you only have one last "
+"option: send an email to \"regalos@taosmi.es\"."
+msgstr ""
+"Si no ets capaç de recordar es correu electrònic que utilises per registrar-"
+"te en TAOSMI Regalos, només te queda aquesta opció: enviar un correu a "
+"'regalos@taosmi.es'."
+
+#: views/recoverPassword.php:32
+msgid ""
+"Your request will be kindly attended, violating all known standards and "
+"rights for data protection on this planet and on the rest of the solar "
+"system (excluding planets beyond the asteroid belt, Ceuta and Melilla) and "
+"you agree with this."
+msgstr ""
+"Sa teva petició serà amablement atesa, violant totes ses normes i drets "
+"sobre protecció de dades conegudes en aquest planeta i a la resta des "
+"sistema solar (excloguent planetes de més enllà des cinturó d'asteroides, "
+"Ceuta i Melilla) i estàs totalment d'acord."
+
+#: views/register.php:16
+msgid "Create your TAOSMI Regalos Account"
+msgstr "Crear compte TAOSMI Regalos"
+
+#: views/register.php:58
+msgid "By joining TAOSMI, you agree to our Terms of Service and Privacy Policy"
+msgstr ""
+"En unir-se a TAOSMI, està d'acord amb sos termes de servici i política de "
+"privacitat"
+
+#: views/register.php:61
+msgid "Create account"
+msgstr "Crear compte"
+
+#: views/register.php:62
+msgid "Back to Homepage"
+msgstr "Tornar a s'inici"
+
+#: views/shopList.php:4 views/shopList.php:15 viewsPatterns/header.php:4
+msgid "Wish List"
+msgstr "Desitjos"
+
+#: views/shopList.php:20
+msgid "New gift"
+msgstr "Nou present"
+
+#: views/shopList.php:31
+msgid "Created on"
+msgstr "Creat en"
+
+#: views/shopList.php:34
+msgid "Edit"
+msgstr "Editar"
+
+#: viewsPatterns/header.php:3
+msgid "Activity"
+msgstr "Activitat"
+
+#: viewsPatterns/header.php:7
+msgid "Logout"
+msgstr "Logout"
+
+#~ msgid "News"
+#~ msgstr "Novetats"
+
+#~ msgid "User Info"
+#~ msgstr "Dades de s'Usuari"
+
+#~ msgid "Reset password"
+#~ msgstr "Baratar contrasenya"

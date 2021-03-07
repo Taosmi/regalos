@@ -1,0 +1,124 @@
+/*    F O R M    E L E M E N T S    */
+
+form {
+   margin: 0 auto;
+   padding: 30px 40px;
+}
+
+fieldset {
+   border: 0;
+   padding: 10px 0;
+}
+
+label {
+   clear: left;
+   display: block;
+   font-size: 1.3em;
+}
+
+input {
+   border: 1px solid #b9b9b9;
+   font-size: 1.15em;
+   height: 30px;
+   padding: 0 6px;
+}
+fieldset > input {
+   margin-bottom: 15px;
+}
+input:hover {
+   box-shadow: inset 0 1px 2px #ddd;
+}
+input[type=checkbox] {
+   height: inherit;
+   margin: 4px 10px;
+   vertical-align: middle;
+}
+input[type=radio] {
+   height: inherit;
+   margin: 0 4px 0 35px;
+   vertical-align: middle;
+}
+
+select {
+   border: 1px solid #b9b9b9;
+   font-size: 1.15em;
+   padding: 4px 5px;
+}
+fieldset > select {
+   margin-bottom: 15px;
+}
+select:hover {
+   box-shadow: inset 0 1px 2px #ddd;
+}
+
+textarea {
+   border: 1px solid #b9b9b9;
+   font-family: Arial;
+   font-size: 1.15em;
+   padding: 6px;
+}
+
+button {
+   border: 0;
+   border-radius: 4px;
+   cursor: pointer;
+   font-size: 1.3em;
+   margin-bottom: 10px;
+   padding: 10px 12px;
+   transition-duration: 0.2s;
+}
+button:hover {
+   box-shadow: 0 2px 4px #aaa;
+   transform: scale(1.03);
+}
+
+/*    F O R M    C L A S S E S    */
+
+fieldset.language {
+   padding: 0;
+   text-align: right;
+}
+fieldset.language img {
+   vertical-align: top;
+}
+fieldset.language select {
+   padding: 0 2px;
+}
+
+input[type=password].fullsize, input[type=text].fullsize {
+   width: 96%;
+}
+select.fullsize, button.fullsize {
+   width: 100%;
+}
+textarea.fullsize {
+   width: 96%;
+}
+
+button.primary {
+   background-color: #4993D3;
+   color: white;
+}
+button.secondary {
+   background-color: #EF3B3B;
+   color: white;
+}
+
+label.text {
+   display: inline;
+   font-size: 1em;
+}
+
+.file input[type=file] {
+   display: none;
+}
+.file p {
+   background-color: #e0e0e0;
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: contain;
+   border: 2px dashed #c0c0c0;
+   border-radius: 4px;
+   padding: 140px 0 0 0;
+   text-align: center;
+}

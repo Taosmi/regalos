@@ -1,0 +1,20 @@
+<html>
+<head>
+    <title>TAOSMI Regalos</title>
+</head>
+<body>
+	<p>Esto es un correo electrónico automático. Por favor, no lo responda.</p>
+	<br/>
+	<p>Estimado $userName</p>
+	<p>
+		Un Año más, ya está disponible una nueva versión de TAOSMI Regalos.
+	</p>
+	<p>
+		Accede a <a href='http://regalos.taosmi.es'>TAOSMI Regalos</a> con el mismo usuario de siempre
+		y comienza a poner todos los regalos de este año!
+	</p>
+	</br>
+	<p>Gracias por utilizar TAOSMI Regalos</p>
+	<p><img src='http://taosmi.es/webapps/taosmi.es/static/imgs/brainTaosmiLogo.gif' style='float:left; width:200px'/></p>
+</body>
+</html>

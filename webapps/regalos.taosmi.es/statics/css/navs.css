@@ -1,0 +1,39 @@
+/*    N A V    E L E M E N T S    */
+
+nav {
+   border-bottom: 2px solid #a0a0a0;
+   padding: 0 30%;
+   padding-top: 35px;
+   margin-bottom: 25px;
+   min-height: 116px;
+}
+
+nav a {
+   background: #ababab no-repeat center 30%;
+   box-shadow: 3px 0 1px rgba(158, 157, 140, 0.53);
+   color: white;
+   float: left;
+   font-size: 1.2em;
+   font-weight: bold;
+   margin: 0 1%;
+   min-width: 90px;
+   padding: 85px 0 9px 0;
+   position: relative;
+   top: 0;
+   text-align: center;
+   text-decoration: none;
+   transition-duration: 0.2s;
+}
+nav a:hover {
+   color: white;
+   padding-top: 110px;
+   top: -25px;
+}
+
+/*    N A V    C L A S S E S    */
+
+nav a.selected {
+   color: white;
+   padding-top: 110px;
+   top: -25px;
+}

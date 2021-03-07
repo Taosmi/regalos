@@ -1,0 +1,45 @@
+/*    T E X T    E L E M E N T S    */
+
+body {
+   color: #555;
+   font: normal 14px 'Open Sans', sans-serif;
+}
+
+h1 {
+   font-size: 3.998em;
+   font-weight: normal;
+   margin: 0 0 10px 0;
+   text-align: center;
+}
+h2 {
+   border-bottom: 2px solid #4399D5;
+   color: #4399D5;
+   font-size: 2.827em;
+   font-weight: normal;
+   margin: 0 0 10px 0;
+   padding: 0 0 10px 0;
+}
+h3 {
+   font-size: 1.999em;
+}
+
+p {
+   margin: 0;
+   padding: 10px 0;
+   text-align: justify;
+}
+section.card > p {
+   font-size: 1.2em;
+}
+
+
+/*    T E X T    C L A S S E S    */
+
+span.remark {
+   font-weight: bold;
+}
+
+p#info {
+   font-size: 2em;
+   text-align: center;
+}

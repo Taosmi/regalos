@@ -1,0 +1,81 @@
+/*    M A I N    E L E M E N T S    */
+
+body {
+   margin: 0;
+}
+main {
+   margin: 0 16%;
+}
+img {
+   border: 0;
+}
+
+/*    L I S T    E L E M E N T S    */
+
+ul {
+   display: block;
+   list-style: none;
+   margin: 0;
+   padding: 0;
+}
+ul li {
+   margin: 0 0 15px 0;
+   padding: 0;
+}
+
+section > ul li {
+   background-color: #f9f9f9;
+   border: 1px solid #f0f0f0;
+   border-radius: 3px;
+   padding: 20px;
+   margin: 0 0 15px 0;
+}
+
+/*    C A R D    C L A S S E S    */
+
+section.card {
+   background-color: #f7f7f7;
+   border-radius: 4px;
+   box-shadow: 0 2px 2px 0 #aaa;
+   clear: both;
+   margin: 0 auto;
+   padding: 30px;
+}
+section.card > div:first-child {
+   float: right;
+}
+section.card > div:first-child a.icon {
+   margin-right: 10px;
+   margin-left: 10px;
+}
+
+section.listcard {
+   margin: 0 5%;
+   padding: 30px;
+}
+section.listcard > div:first-child {
+   min-height: 55px;
+}
+
+/*    L A Y O U T    C L A S S E S    */
+
+.twoCols {
+   clear: none !important;
+   float: left;
+   margin-right: 3%;
+   width: 47%;
+}
+.twoCols.main {
+   width: 61.80%;
+}
+.twoCols.secondary {
+   width: 32%;
+}
+
+.threeCols {
+   clear: none !important;
+   float: left;
+   margin-right: 3%;
+   width: 30%;
+}
+

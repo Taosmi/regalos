@@ -1,0 +1,21 @@
+# Directory listing is not allowed.
+Options -Indexes
+
+# Rewrite engine is a must.
+Options +FollowSymLinks
+RewriteEngine On
+RewriteBase /
+
+# Let the runPHP static content pass through.
+RewriteCond %{REQUEST_URI} ^/runPHP/statics/
+RewriteRule ^ - [L]
+
+# Let the apps static content pass through.
+RewriteCond %{REQUEST_URI} ^/webapps/.*/statics/
+RewriteRule ^ - [L]
+
+# Dodge trailing slashes.
+RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+# Anything else is handled by the front controller.
+RewriteRule ^ run.php [L]

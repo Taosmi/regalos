@@ -1,0 +1,24 @@
+// Wait until the page is loaded.
+$(window).ready(function () {
+
+    // Login form submit.
+    $('#resetForm').submit(function (event) {
+        event.preventDefault();
+        // Send new password.
+        $.ajax({
+            method: 'GET',
+            url: '/v1/recover',
+            contentType: 'application/json; charset=UTF-8',
+            data: {
+                email: $('#email').val(),
+            },
+            success: function (data) {
+                $('#recoverForm').replaceWith('<h1><a href="/index">' + data.result + '</a></h1>');
+            },
+            error: function (data) {
+                alert(data.responseJSON.error.msg);
+            }
+        });
+    });
+
+});

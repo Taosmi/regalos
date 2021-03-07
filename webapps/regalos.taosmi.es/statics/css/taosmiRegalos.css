@@ -1,0 +1,167 @@
+/*    N A V    L I N K S    */
+
+nav a#news {
+	background-color: #F9CE29;
+	background-image: url('/webapps/regalos.taosmi.es/statics/imgs/bubbleIcon.png');
+}
+nav a#shoplist {
+	background-color: #E43C0D;
+	background-image: url('/webapps/regalos.taosmi.es/statics/imgs/shopListIcon.png');
+}
+nav a#friends {
+	background-color: #BF4BCF;
+	background-image: url('/webapps/regalos.taosmi.es/statics/imgs/friendsIcon.png');
+	float: right;
+}
+nav a#options {
+	background-color: #93C748;
+	background-image: url('/webapps/regalos.taosmi.es/statics/imgs/optionsIcon.png');
+	float: right;
+}
+nav a#exit {
+	background-size: auto 110%;
+	float: right;
+}
+nav a#exit span {
+	background-color : #888;
+	display: block;
+}
+
+/*    L O G I N     */
+
+section.login {
+	max-width: 430px;
+}
+figure#logo {
+	padding-top: 30px;
+	text-align: center;
+}
+p#newAccount {
+	font-size: 1.33em;
+	margin: 10px 0px 20px 0px;
+	padding-bottom: 15px;
+	text-align: center;
+}
+footer#sponsor {
+	padding-top: 15px;
+	text-align: center;
+}
+
+/*    R E C O V E R    P A S S W O R D    */
+
+section.recover {
+	max-width: 430px;
+}
+
+/*    R E G I S T E R    */
+
+section.register {
+	max-width: 450px;
+}
+section.register p#welcome {
+	font-size: 2em;
+	padding: 40px 0;
+	text-align: center;
+}
+
+/*    N E W S    */
+
+li.news img.user {
+	border-radius: 50%;
+	float: left;
+	height: 45px;
+	margin-right: 10px;
+	min-width: 45px;
+}
+li.news img.gift {
+	width: 100%;
+}
+li.news p.privacy {
+	padding-bottom: 0;
+	text-transform: capitalize;
+}
+li.news p.privacy img {
+	vertical-align: middle;
+}
+li.news p.user {
+	color: #222;
+	font-size: 1.3em;
+	padding: 0;
+	text-transform: capitalize;
+}
+li.news p.date {
+	font-size: 0.9em;
+	padding-top: 0;
+}
+li.news p.title {
+	color: black;
+	font-size: 1.2em;
+	padding-bottom: 1px;
+	text-transform: capitalize;
+}
+li.news p.desc {
+	margin-bottom: 10px;
+	padding: 0;
+	text-align: justify;
+}
+
+a.seenHere {
+	color: #888;
+	float: right;
+	font-size: 0.9em;
+}
+a.seenHere img {
+	vertical-align: middle;
+}
+
+/*    S H O P L I S T    C A R D    */
+
+li.gifts p.createdOn {
+	font-size: 0.9em;
+	padding: 0 0 10px 0;
+}
+li.gifts figure {
+	float: right;
+	height: 142px;
+	margin: 0;
+	padding-left: 10px;
+	position: relative;
+	text-align: right;
+	top: -13px;
+	width: 130px;
+}
+li.gifts p.title {
+	color: black;
+	font-size: 1.2em;
+	padding-bottom: 1px;
+	text-transform: capitalize;
+}
+li.gifts p.desc {
+	margin-bottom: 10px;
+	padding: 0;
+	text-align: justify;
+}
+li.gifts img.gift {
+	height: 100%;
+	max-width: 140px;
+	width: auto;
+}
+li.gifts p.privacy {
+	padding-bottom: 0;
+	text-transform: capitalize;
+}
+li.gifts p.privacy img {
+	vertical-align: middle;
+}
+
+/*    G I F T    */
+
+section.gift {
+	max-width: 650px;
+}
+
+/*    U S E R    */
+
+section.user {
+	max-width: 750px;
+}

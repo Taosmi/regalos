@@ -1,0 +1,883 @@
+//ProFun JS.
+//Copyright TAOSMI.
+
+    var $proFunVersion = [];		//Version de profun.
+    var $elementMethods = {};		//Los metodos de elementos se guardan en esta coleccion.
+
+//****************
+//ProFun JS Core.
+//****************
+
+    $proFunVersion.push("ProFun JS Core v.1.0");
+
+//Obtiene el tipo del objeto especificado.
+    function $type(obj) {
+        if (obj.nodeType) {
+            switch(obj.nodeType) {
+                case 1: return "element"; break;
+                case 3: return "textnode"; break;
+                case 9: return "document"; break;
+            }
+        }
+        if (obj.item && obj.length) return "collection";
+        if (obj.nodeName) return obj.nodeName;
+        if (obj.sort) return "array";
+        return typeof(obj);
+    }
+
+//Comprueba si el objeto especificado est� definido.
+    function $defined(obj) {
+        if ((obj == undefined) || (obj == null)) return false;
+        return true;
+    }
+
+//Comprueba si el objeto especificado est� Ok (definido y no est� vac�o).
+    function $chk(obj) {
+        if (!obj) return false;
+        if (($type(obj) == "array") && (obj.length == 0)) return false;
+        for (var prop in obj) break;
+        if (!prop) return false;
+        return true;
+    }
+
+//Obtiene el primer objeto Ok de los objetos especificados.
+    function $pick() {
+        for (var i=0,l=arguments.length; i<l; i++) {
+            if ($chk(arguments[i])) return arguments[i];
+        }
+        return null;
+    }
+
+//Copia las propiedades del objeto origen al objeto destino.
+    function $extend(destiny, source) {
+        if (!$defined(destiny) || !$defined(source)) return destiny;
+        for (var prop in source) {
+            if (destiny.prototype) destiny.prototype[prop] = source[prop];
+            else destiny[prop] = source[prop];
+        }
+        return destiny;
+    }
+
+//Obtiene una copia del objeto especificado.
+    function $copy(obj) {
+        switch($type(obj)) {
+            case "object":
+                var copyObj = new Object();
+                for (var prop in obj) copyObj[prop] = $copy(obj[prop]);
+            break;
+            case "array":
+                var copyObj = new Array();
+                for (var i=0,l=obj.length; i<l; i++) copyObj[i] = $copy(obj[i]);
+            break;
+            default: var copyObj = obj;
+        }
+        return copyObj;
+    }
+
+//Obtiene un numero aleatorio en el rango [min,max] especificado.
+    function $random(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
+//Obtiene el TimeStamp del sistema.
+    function $timeStamp() {
+        return new Date().getTime();
+    }
+
+//Obtiene la fecha actual del sistema. Se puede especificar un offset opcional.
+    function $time(days) {
+        days = days || 0;
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*3600*1000));
+        return date;
+    }
+
+//Obtiene informaci�n sobre el navegador.
+    function $engine() {
+        return navigator.appName;
+    }
+
+//Obtiene informaci�n sobre el SO.
+    function $platform() {
+        return navigator.platform;
+    }
+
+//******************
+//ProFun JS Native.
+//******************
+
+    $proFunVersion.push("ProFun JS Native v.1.0");
+
+//********** ProFun JS Arrays **********
+
+//Ejecuta la funcion especificada a cada elemento del array, usando como par�metros (elemento, indice).
+    Array.prototype.$each = function(fHandler) {
+        for (var i=0, l=this.length; i<l; i++) {
+            fHandler(this[i],i);
+        }
+        return this;
+    };
+
+//Obtiene verdadero si la funcion especificada retorna verdadero para algun elemento del array.
+    Array.prototype.$detect = function(fHandler) {
+        for (var i=0, l=this.length; i<l; i++) {
+            if (fHandler(this[i])) return true;
+        }
+        return false;
+    };
+
+//Obtiene un array con los elementos que retornan verdadero para la funcion especificada.
+    Array.prototype.$select = function(fHandler) {
+        for (var i=0, result=[], l=this.length; i<l; i++) {
+            if (fHandler(this[i])) result.push(this[i]);
+        }
+        return result;
+    };
+
+//Obtiene el elemento mayor. Opcionalmente se puede especificar la funcion evaluadora.
+    Array.prototype.$max = function() {
+        if (this.length == 0) return false;
+        if (this.length == 1) return this[0];
+        if (arguments.length == 1) {
+            var f = arguments[0];
+            for (var i=1,max=this[0],l=this.length; i<l; i++) {
+                if (f(this[i]) > f(max)) max = this[i];
+            }
+            return max;
+        }
+        for (var i=1,max=this[0],l=this.length; i<l; i++) {
+            if (this[i] > max) max = this[i];
+        }
+        return max;
+    };
+
+//Obtiene el elemento menor. Opcionalmente se puede especificar la funcion evaluadora.
+    Array.prototype.$min = function() {
+        if (this.length == 0) return false;
+        if (this.length == 1) return this[0];
+        if (arguments.length == 1) {
+            var f = arguments[0];
+            for (var i=1,min=this[0],l=this.length; i<l; i++) {
+                if (f(this[i]) < f(min)) min = this[i];
+            }
+            return min;
+        }
+        for (var i=1,min=this[0],l=this.length; i<l; i++) {
+            if (this[i] < min) min = this[i];
+        }
+        return min;
+    };
+
+//Obtiene el indice de un elemento.
+    Array.prototype.$indexOf = function(value) {
+        for (var i=0,l=this.length; i<l; i++) {
+            if (this[i] == value) return i;
+        }
+        return false;
+    };
+
+//Obtiene el indice de un objeto segun la propiedad y valor especificados.
+    Array.prototype.$indexOfObj = function(prop, value) {
+        for (var i=0,l=this.length; i<l; i++) {
+            if (this[i][prop] == value) return i;
+        }
+        return false;
+    };
+
+//Obtiene un elemento aleatorio del array.
+    Array.prototype.$getRandom = function() {
+        return this[Math.floor(Math.random() * (this.length))];
+    };
+
+//Vacia el array.
+    Array.prototype.$empty = function() {
+        this.length = 0;
+        return this;
+    };
+
+//Extiende el array con otro array.
+    Array.prototype.$merge = function(array) {
+        for (var i=0,l=array.length; i<l; i++) {
+            this.push(array[i]);
+        }
+        return this;
+    };
+
+//A�ade el elemento especificado si no existe en el array.
+    Array.prototype.$add = function(value) {
+        if (this.$indexOf(value) === false) this.push(value);
+        return this;
+    };
+
+//A�ade el objeto especificado en caso de que no existe ninguno con mismo valor en la propiedad especificada.
+    Array.prototype.$addObj = function(obj, prop) {
+        if (this.$indexOfObj(prop, obj[prop]) === false) this.push(obj);
+        return this;
+    };
+
+//Borra el elemento especificado del array.
+    Array.prototype.$del = function(value) {
+        for (var i=0,l=this.length; i<l; i++) {
+            if (this[i] == value) this.splice(i,1);
+        }
+        return this;
+    };
+
+//Borra el objeto del array que tenga en la propiedad especificada el mismo valor que el especificado.
+    Array.prototype.$delObj = function(prop, value) {
+        var pos = this.$indexOfObj(prop,value);
+        if (pos === false) return this;
+        this.splice(pos,1);
+        return this;
+    };
+
+//********** ProFun JS Numbers **********
+
+//Extiende los numeros con los metodos del objeto Math.
+    $extend(Number, {
+        abs:   function() { return Math.abs(this); },
+        acos:  function() { return Math.acos(this); },
+        asin:  function() { return Math.asin(this); },
+        atan:  function() { return Math.atan(this); },
+        atan2: function(x) { return Math.atan2(this,x); },
+        ceil:  function() { return Math.ceil(this); },
+        cos:   function() { return Math.cos(this); },
+        exp:   function() { return Math.exp(this); },
+        floor: function() { return Math.floor(this); },
+        log:   function() { return Math.log(this); },
+        max:   function(x) { return Math.max(this,x); },
+        min:   function(x) { return Math.min(this,x); },
+        pow:   function(x) { return Math.pow(this,x); },
+        sin:   function() { return Math.sin(this); },
+        sqrt:  function() { return Math.sqrt(this); },
+        tan:   function() { return Math.tan(this); }
+    });
+
+//Obtiene un numero delimitado por el rango [min,max] especificado.
+    Number.prototype.$limit = function(min,max) {
+        if (this < min) return min;
+        if (this > max) return max;
+        return this;
+    };
+
+//Obtiene el valor entero de un numero. La base es opcional (base 10 por defecto).
+    Number.prototype.$toInt = function(base) {
+        return parseInt(this, (base || 10));
+    };
+
+//Obtiene el valor decimal de un numero.
+    Number.prototype.$toFloat = function() {
+        return parseFloat(this);
+    };
+
+//Obtiene la cadena de caracteres que corresponde con el numero.
+    Number.prototype.$toString = function() {
+        return this + "";
+    };
+
+//********** ProFun JS Strings **********
+
+//Obtiene la representacion numerica de la cadena. La base es opcional (base 10 por defecto).
+    String.prototype.$toInt = function(base) {
+        return parseInt(this,(base || 10));
+    };
+
+//Obtiene la representacion numerica decimal de la cadena.
+    String.prototype.$toFloat = function() {
+        return parseFloat(this);
+    };
+
+//Obtiene la cadena sin espacios por delante ni por detras.
+    String.prototype.$trim = function() {
+        return this.replace(/^\s+|\s+$/g, '');
+    };
+
+//Obtiene la cadena sin tags HTML.
+    String.prototype.$trimTags = function() {
+        return this.replace(/<\/?[^>]+>/g, '');
+    };
+
+//Obtiene la cadena sin tags SCRIPTS.
+    String.prototype.$trimScripts = function() {
+        return this.replace(/<script[.\s]+<\/script>/gi, '');
+    };
+
+//Obtiene la cadena truncada. La longitud es opcional (longitud por defecto 25).
+    String.prototype.$truncate = function(l) {
+        l = l || 25;
+        return this.substr(0, l-3) +"...";
+    };
+
+//Obtiene verdadero si la cadena comienza por la subcadena especificada.
+    String.prototype.$startsWith = function(str) {
+        return (this.indexOf(str) == 0);
+    };
+
+//Obtiene la cadena con la primera letra en mayusculas.
+    String.prototype.$capitalize = function() {
+            return this.charAt(0).toUpperCase() + this.substring(1);
+    };
+
+//Borra el fragmento especificado de la cadena.
+    String.prototype.$erase = function(str) {
+        return this.replace(new RegExp(str,"gi"),"");
+    };
+
+//***************
+//ProFun JS DOM.
+//***************
+
+    $proFunVersion.push("ProFun DOM v.1.0");
+
+//Marca de objeto extendido. Se usa para evitar extender objetos varias veces.
+    $elementMethods.$proFunObj = true;
+
+//Obtiene el/los objetos con ids especificados y ademas los extiende con los metodos profun.
+    function $(obj) {
+        if (arguments.length > 1) {
+            for (var i=0,r=[],l=arguments.length; i<l; i++) {
+                r[i] = ($type(arguments[i]=="string"))? document.getElementById(arguments[i]) : arguments[i];
+                if (r[i] && !r[i].$proFunObj) r[i] = $extend(r[i], $elementMethods);
+            }
+            return r;
+        }
+        var extObj = ($type(obj)=="string")? document.getElementById(obj) : obj;
+        if (extObj && !extObj.$proFunObj) $extend(extObj, $elementMethods);
+        return extObj;
+    }
+
+//Obtiene el primer objeto cuya propiedad name es igual a la especificada.
+    function $N(name) {
+        return $(document.getElementsByName(name)[0]);
+    }
+
+//Obtiene un nuevo objeto del tipo especificado.
+    function $createElement(objType) {
+        return $(document.createElement(objType));
+    }
+
+//Elimina el objeto.
+    $elementMethods.$del = function() {
+        this.parentNode.removeChild(this);
+    };
+
+//Obtiene verdadero si el objeto tiene hijos.
+    $elementMethods.$hasChild = function() {
+        return (this.firstChild)? true : false;
+    };
+
+//Obtiene un objeto hijo.
+//pos (Opcional). top: primer hijo. bottom: ultimo hijo.
+//tag (Opcional). Tipo de nodos: DIV, SPAN, etc.
+    $elementMethods.$getChild = function(pos, tag) {
+        pos = pos || "top";
+        tag = tag || "";
+        var obj = (pos=="top")? this.firstChild : this.lastChild;
+        if (tag != "") {
+        while ((obj) && (obj.nodeName != tag))
+            obj = (pos=="top") ? obj.nextSibling : obj.previousSibling;
+       } else {
+            while ((obj) && (obj.nodeType != 1))
+            obj = (pos=="top") ? obj.nextSibling : obj.previousSibling;
+       }
+        return (obj)? $(obj) : false;
+    };
+
+//Obtiene el objeto padre.
+    $elementMethods.$getParent =  function() {
+        return $(this.parentNode);
+    };
+
+//Obtiene el objeto siguiente o false si no tiene.
+//tag (Opcional). Tipo de nodos: DIV, SPAN, etc.
+    $elementMethods.$next = function(tag) {
+        tag = tag || "";
+        var obj = this.nextSibling;
+        if (tag == "") {
+            while ((obj) && (obj.nodeType != 1))
+                obj = obj.nextSibling;
+        } else {
+            while ((obj) && (obj.nodeName != tag))
+                obj = obj.nextSibling;
+        }
+        return (obj)? $(obj) : false;
+    };
+
+//Obtiene el objeto previo o false si no tiene.
+//tag (Opcional). Tipo de nodos. p.ej. DIV, SPAN, etc.
+    $elementMethods.$previous = function() {
+        var tag = arguments[0] || "";
+        var obj = this.previousSibling;
+        if (tag == "") {
+            while ((obj) && (obj.nodeType != 1))
+                obj = obj.previousSibling;
+        } else {
+            while ((obj) && (obj.nodeName != tag))
+                obj = obj.previousSibling;
+        }
+        return (obj)? $(obj) : false;
+    };
+
+//Inserta el objeto especificado como �ltimo hijo (forma por defecto).
+    $elementMethods.$addChild = function(obj) {
+        this.appendChild(obj);
+        return this;
+    };
+
+//Inserta el objeto especificado como hermano del actual (forma por defecto).
+    $elementMethods.$addBrother = function(obj) {
+        this.$getParent().appendChild(obj);
+        return this;
+    };
+
+//Inserta el objeto especificado como hermano anterior al actual.
+    $elementMethods.$addBrotherBefore = function(obj) {
+        this.$getParent().insertBefore(obj, this);
+        return this;
+    };
+
+//Inserta el objeto especificado como hermano posterior al actual.
+    $elementMethods.$addBrotherAfter = function(obj) {
+        return (this.$next())? this.$next().$addBrotherBefore(obj) : this.$addBrother(obj);
+    };
+
+//Actualiza el contenido HTML del elemento por el indicado.
+    $elementMethods.$update = function(txt) {
+        this.innerHTML = txt;
+        return this;
+    };
+
+//Elimina los hijos.
+    $elementMethods.$delChildrens = function() {
+        this.innerHTML = "";
+        return this;
+    };
+
+//Reemplaza el objeto actual por el especificado.
+    $elementMethods.$replace = function(obj) {
+        this.$getParent().replaceChild(obj, this);
+        return this;
+    };
+
+//Clona el objeto actual. Opcionalmente se puede clonar todo el arbol si childs vale verdadero.
+    $elementMethods.$clone = function(childs) {
+        return $(this.cloneNode(childs));
+    };
+
+//Asigna la clase especificada, sobreescribiendo las existentes.
+    $elementMethods.$setClass = function(clas) {
+        this.className = clas;
+        return this;
+    };
+
+//A�ade la clase especificada.
+    $elementMethods.$addClass = function(clas) {
+        if (!clas) return this;
+        this.className += " "+clas;
+        return this;
+    };
+
+//Elimina solo la clase especificada.
+    $elementMethods.$delClass = function(clas) {
+        if (!clas) return this;
+        this.className = this.className.$erase(clas);
+        return this;
+    };
+
+    //Obtiene verdadero si el nodo tiene la clase especificada.
+    $elementMethods.$hasClass = function(className) {
+        return (this.className.search(new RegExp("(^|( )+)"+ className +"(( )+|$)")) >= 0);
+    };
+
+//Añade o elimina una clase.
+    $elementMethods.$toggleClass = function(className) {
+        return (this.$hasClass(className))? this.$delClass(className) : this.$addClass(className);
+    };
+
+//Obtiene el estilo de la propiedad especificada.
+    $elementMethods.$getStyle = function(prop) {
+        if (this.currentStyle) return this.currentStyle[prop];
+        return document.defaultView.getComputedStyle(this,null).getPropertyValue(prop);
+    };
+
+//Asigna el texto especificado como contenido html.
+    $elementMethods.$setHTML = function(txt) {
+        this.innerHTML = txt;
+        return this;
+    };
+
+//A�ade el texto especificado al contenido html.
+    $elementMethods.$addHTML = function(txt) {
+        this.innerHTML += txt;
+        return this;
+    };
+
+//******************
+//ProFun JS Events.
+//******************
+
+    $proFunVersion.push("ProFun JS Events v.1.0");
+
+//Asigna al evento DOMLoaded la funcion especificada.
+    function $observeDOM(fHandle) {
+        if (document.addEventListener) {
+            document.addEventListener("DOMContentLoaded", fHandle, false);
+        } else {
+            document.onreadystatechange = function() {
+                if (document.readyState == "complete") fHandle();
+            };
+        }
+    }
+
+//Obtiene la lista de funciones asociada a un objeto.
+    $elementMethods.$getEventList = function() {
+        return this.$eList;
+    }
+
+//Enlaza a un objeto la funcion especificada para el evento especificado. Parametros y enlazado a objeto opcionales.
+    $elementMethods.$observe = function(eType, fHandle, fParams, objBind) {
+        objBind = objBind || this;
+        fParams = fParams || [];
+        this.$eList = this.$eList || [];
+        var fWrapTmp = function(e) { var params = [].$merge(fParams).$merge([e]); return fHandle.apply(objBind, params); };
+        if (this.addEventListener) {
+            if (eType == "mousewheel") eType = "DOMMouseScroll";
+            this.addEventListener(eType, fWrapTmp, false);
+        } else {
+            this.attachEvent("on"+eType, fWrapTmp);
+        }
+        this.$eList.$add({f:fHandle, fWrap:fWrapTmp, eType:eType});
+    }
+
+//Desenlaza de un objeto la funcion especificada para el evento especificado.
+    $elementMethods.$stopObserve = function(eType, fHandler) {
+        var listWrap = this.$eList.$select(function(item) { return (item.f == fHandler); });
+        if (!listWrap) alert("Profun JS error stopping Observation.");
+        for (var i=0; i<listWrap.length; i++) {
+            if (this.removeEventListener) {
+                if (eType == "mousewheel") eType = "DOMMouseScroll";
+                this.removeEventListener(eType, listWrap[i].fWrap, false);
+            } else {
+                this.detachEvent("on"+eType, listWrap[i].fWrap);
+            }
+            this.$eList.$delObj("f", fHandler);
+        }
+    }
+
+//Desenlaza de un objeto todas las funciones para todos los eventos.
+    $elementMethods.$stopAllObserve = function() {
+        for (var i=(this.$eList.length-1); i>=0; i--) {
+            this.$stopObserve(this.$eList[i].eType, this.$eList[i].f);
+        }
+        this.$eList.$empty();
+    }
+
+//Lanza el evento especificado.
+    $elementMethods.$fireEvent = function(eType) {
+        if (this.dispatchEvent) {
+            if (eType == "mousewheel") eType = "DOMMouseScroll";
+            var evt = document.createEvent("HtmlEvents");
+            evt.initEvent(eType, true, true);
+            this.dispatchEvent(evt);
+        } else {
+            this.fireEvent("on"+eType);
+        }
+    }
+
+//Detiene el evento. Disponible solo dentro de la funcion que lanza el evento.
+    function $stopEvent(e) {
+        if (e.preventDefault) e.preventDefault(); else e.returnValue = false;
+        if (e.stopPropagation) e.stopPropagation; else e.cancelBubble = true;
+    }
+
+//Detiene la propagacion del evento. Disponible solo dentro de la funcion que lanza el evento.
+    function $stopEventPropagation(e) {
+        if (e.stopPropagation) e.stopPropagation; else e.cancelBubble = true;
+    }
+
+//Obtiene el tipo de evento. Disponible solo dentro de la funcion que lanza el evento.
+    function $getEventType(e) {
+        return e.type;
+    }
+
+//Obtiene la tecla que se ha pulsado. Disponible solo dentro de la funcion que lanza el evento.
+    function $getEventKey(e) {
+        return e.which || e.keyCode;
+    }
+
+//Obtiene el objeto que tiene asociado el evento. Disponible solo dentro de la funcion que lanza el evento.
+    function $getEventSource(e) {
+        return e.srcElement || e.target;
+    }
+
+//Obtiene el objeto desde donde viene el raton (mouseover). Disponible solo dentro de la funcion que lanza el evento.
+    function $getEventFromTarget(e) {
+        return e.relatedTarget || e.fromElement;
+    }
+
+//Obtiene el objeto al que fue el raton (mouseout). Disponible solo dentro de la funcion que lanza el evento.
+    function $getEventToTarget(e) {
+        return e.relatedTarget || e.toElement;
+    }
+
+//Obtiene la direccion de la rueda. Disponible solo dentro de la funcion que lanza el evento.
+    function $getEventWheel(e) {
+        if (e.wheelDelta) return e.wheelDelta;
+        if (e.detail) return e.detail;
+        return 0;
+    }
+
+//Obtiene la coord. X del raton en las que se produjo el evento. Disponible solo dentro de la funcion que lanza el evento.
+    function $getMouseX(e) {
+        var scrollX = $getScrollX();
+        if (e.pageX) return e.pageX + scrollX;
+        if (e.clientX) return e.clientX + scrollX;
+        return 0;
+    }
+
+//Obtiene la coord. Y del raton en las que se produjo el evento. Disponible solo dentro de la funcion que lanza el evento.
+    function $getMouseY(e) {
+        var scrollY = $getScrollY();
+        if (e.pageY) return e.pageY;
+        if (e.clientY) return e.clientY + scrollY;
+        return 0;
+    }
+
+//Obtiene el scroll en X del navegador.
+    function $getScrollX() {
+        if (window.pageXOffset) return window.pageXOffset;
+        if (document.body && document.body.scrollLeft)
+            return document.body.scrollLeft;
+        if (document.documentElement && document.documentElement.scrollLeft)
+            return document.documentElement.scrollLeft;
+        return 0;
+    }
+
+//Obtiene el scroll en Y del navegador.
+    function $getScrollY() {
+        if (window.pageYOffset) return window.pageYOffset;
+        if (document.body && document.body.scrollTop)
+            return document.body.scrollTop;
+        if (document.documentElement && document.documentElement.scrollTop)
+            return document.documentElement.scrollTop;
+        return 0;
+    }
+
+//***********************
+//ProFun JS Validations.
+//***********************
+
+    $proFunVersion.push("ProFun JS Validations v.1.0");
+
+//Valida la cadena especificada (solo permite caracteres, numeros, espacios, _ y -).
+    function $chkText(txt) {
+        if (!$chk(txt)) return false;
+        if (txt.match(/[^a-zA-Z0-9��\s_-]/)) return false;
+        return true;
+    }
+
+//Valida la direcci�n de correo electr�nico especificada.
+    function $chkEmail(txt) {
+        if (txt.match(/^\w(\.?\w)*@(\w)+(\.(\w)+)+$/)) return true;
+        return false;
+    }
+
+//Valida el tel�fono m�vil especificado.
+    function $chkMobile(num) {
+        if (txt.match(/^6(\d){8}$/)) return true;
+        return false;
+    }
+
+//Valida el un n�mero especificado.
+    function $chkNumber(num) {
+        return (!isNaN(num));
+    }
+
+//Valida el importe especificado (1234,4000 o 1234.4000).
+    function $chkMoney(num) {
+        if (num.match(/^(\d)+([,\.](\d){1,4})?$/)) return true;
+        return false;
+    }
+
+//Valida el select a partir del id especificado (la opci�n seleccionada debe tener value Ok).
+    function $chkSelect(id) {
+        return $chk($(id).value);
+    }
+
+//Valida un conjunto de radio buttons a partir del name especificado (debe haber uno seleccionado).
+    function $chkRadios(name) {
+        var objs = document.getElementsByName(name);
+        for (var i=0,l=objs.length; i<l; i++) {
+            if (objs[i].checked) return true;
+        }
+        return false;
+    }
+
+//*******************
+//ProFun JS Cookies.
+//*******************
+
+    $proFunVersion.push("ProFun JS Cookies v.1.0");
+
+//Constructor.
+//Crea el objeto cookie con el nombre de la cookie especificado.
+    function $Cookie(name) {
+        this.name = name;
+    }
+
+//Metodos.
+//Lee el valor de la cookie.
+    $Cookie.prototype.$read = function() {
+        if (document.cookie.match(this.name+'=([^;]*)')) return cookie[1];
+        return "";
+    };
+//Guarda en la cookie el valor y propiedades especificados.
+    $Cookie.prototype.$write = function(value, days, secure, domain, path) {
+        secure = secure || false;
+        domain = domain || document.domain;
+        path = path || "/";
+        var cookie = this.name +"="+ value +";";
+        var date = $time(days || 0);
+        if (days) cookie += " expires="+ $time(days).toGMTString() +";";
+        cookie += " path="+ path +";";
+        cookie += " domain="+ domain +";";
+        if (secure) cookie += " secure";
+        document.cookie = cookie;
+    };
+//Borra la cookie.
+    $Cookie.prototype.$erase = function() {
+        this.write("", -1);
+    };
+
+//****************
+//ProFun JS AJAX.
+//****************
+
+    $proFunVersion.push("ProFun JS AJAX v.1.0");
+
+//Constructor.
+//Crea el objeto ajax. Los par�metros uri, la funcion y el metodo son opcionales.
+    function $Ajax(uri, fHandler, method) {
+        this.uri = uri || "";
+        this.fHandler = fHandler || null;
+        this.method = method || "GET";
+        this.xmlHttp = false;
+        try { this.xmlHttp = new XMLHttpRequest(); } catch(e) {}
+        if (!this.xmlHttp) try { this.xmlHttp = new ActiveXObject("Msxml2.XMLHTTP"); } catch(e) {}
+        if (!this.xmlHttp) try { this.xmlHttp = new ActiveXObject("Microsoft.XMLHTTP"); } catch(e) {}
+        if (!this.xmlHttp) try { this.xmlHttp = new ActiveXObject("Msxml2.XMLHTTP.4.0"); } catch(e) {}
+        if (!this.xmlHttp) alert("Profun Error: No Ajax supported");
+    }
+
+//Metodos.
+//Envia la petici�n. Si no se especifican los par�metros utilizar� los especificados al construir el objeto.
+    $Ajax.prototype.$send = function(uri, fHandler, method) {
+        fHandler = fHandler || this.fHandler;
+        this.uri = uri || this.uri;
+        this.method = method || this.method;
+        var xmlHttpRef = this.xmlHttp;
+        this.xmlHttp.onreadystatechange = function() { return fHandler.apply(xmlHttpRef) };
+        this.xmlHttp.open(this.method, this.uri, true);
+        this.xmlHttp.send(null);
+    }
+
+//*********************
+//ProFun JS XMLParser.
+//*********************
+
+    $proFunVersion.push("ProFun JS XMLParser v.1.0");
+
+//Obtiene el arbol xml a partir del texto especificado.
+    function $xmlParser(txt) {
+        xmlObj = false;
+        if (ActiveXObject("Microsoft.XMLDOM")) {
+            xmlObj = new ActiveXObject("Microsoft.XMLDOM");
+            xmlObj.async = false;
+            xmlObj.loadXML(txt);
+        }
+        if (DOMParser) {
+            xmlParser = new DOMParser();
+            xmlObj = xmlParser.parserFromString(txt,"text/xml");
+        }
+        return xmlObj;
+    }
+
+//**********************
+//ProFun JS showList.
+//**********************
+
+    $proFunVersion.push("ProFun JS showList v.1.0");
+
+//Constructor.
+//Crea el objeto showlist a partir de una lista de elementos y de la funcion action especificada.
+    function $ShowList(list, action) {
+        this.ck = null;
+        this.list = list;
+        this.action = action || null;
+        this.last = null;
+        this.rollBack = false;
+    }
+
+//Metodos.
+//Establece el control para que solo muestre una vez cada elemento (mediante cookie).
+    $ShowList.prototype.$setShowOnceCookie = function(ck) {
+        this.ck = new $Cookie(ck);
+    }
+//Permite que la lista sea c�clica. 
+    $ShowList.prototype.$setRollBack = function(value) {
+        this.rollBack = value;
+    }
+//Guarda el �ltimo elemento mostrado en la cookie de control.
+    $ShowList.prototype.$cookieStore = function() {
+        if ((!this.ck) || (this.last == null)) return false;
+        if (this.list[this.last].remind === true) return false;
+        if (($type(this.list[this.last].remind) == "string") && ($(this.list[this.last].remind).checked)) return false;
+        var ckValue = this.ck.$read();
+        if (ckValue.indexOf(this.list[this.last].id) < 0) {
+            this.ck.$write((ckValue + this.list[this.last].id + ","));
+        }
+        return true;
+    }
+//Muestra el primer elemento de la lista disponible.
+    $ShowList.prototype.$show = function() {
+        var d = new Date();
+        var fecAct = d.getFullYear() +"/"+ (d.getMonth()+1) +"/"+ d.getDate();
+        var ckValue = (this.ck)? this.ck.$read() : "";
+        var pos = (this.last != null)? this.last+1 : 0;
+        if (this.rollBack) pos = pos % this.list.length;
+        while (pos < this.list.length) {
+            if (this.list[pos].showable() && (!this.ck || (ckValue.indexOf(this.list[pos].id) < 0)) && (fecAct > this.list[pos].start) && (fecAct < this.list[pos].end)) {
+                this.action(this.list[pos].id);
+                this.last = pos;
+                return true;
+            } else {
+                this.list.splice(this.last,1);
+            }
+        }
+        return false;
+    }
+//Calcula la propiedad showable de cada elemento y la sustituye por su valor booleano.
+    $ShowList.prototype.$overrideShowable = function() {
+        for (var i=0,l=this.list.length; i<l; i++) {
+            if (this.list[i].showable()) this.list[i].showable = function() { return true };
+            else this.list[i].showable = function() { return false };
+        }
+    }
+//Obtiene el elemento a partir del id especificado.
+    $ShowList.prototype.$get = function(id) {
+        return (this.list.$indexOfObj("id",id) === false)? false : this.list[i];
+    }
+
+//Obtiene el numero de elementos que son showables.
+    $ShowList.prototype.$getNumShowables = function() {
+        var num = 0;
+        for (var i=0,l=this.list.length; i<l; i++) {
+            if (this.list[i].showable()) num++;
+        }
+        return num;
+    }
+//Oculta el �ltimo elemento que se mostr� para que no se vuelva a mostrar.
+    $ShowList.prototype.$hide = function() {
+        if (this.last === null) return false;
+        this.list[this.last].showable = function() { return false; }
+    }
