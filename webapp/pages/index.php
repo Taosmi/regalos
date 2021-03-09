@@ -3,13 +3,13 @@
 <head>
     <title><? _e('TAOSMI Regalos') ?></title>
     <? $this->pattern('/resources') ?>
-    <script type="text/javascript" src="/webapps/regalos.taosmi.es/statics/js/login.js"></script>
+    <script type="text/javascript" src="/webapp/statics/js/login.js"></script>
 </head>
 <body>
     <main>
         <!-- Gift image -->
         <figure id="logo">
-            <img src="/webapps/regalos.taosmi.es/statics/imgs/regalo02.png" alt="<? _e('TAOSMI Regalos') ?>"/>
+            <img src="/webapp/statics/imgs/regalo02.png" alt="<? _e('TAOSMI Regalos') ?>"/>
         </figure>
 
         <!-- Main title -->
@@ -19,7 +19,7 @@
         <section class="card login">
             <form id="loginForm" method="post">
                 <fieldset class="language">
-                    <img src="/webapps/regalos.taosmi.es/statics/imgs/lang.png" />
+                    <img src="/webapp/statics/imgs/lang.png" />
                     <select id="language">
                         <option value="es_ES" selected="selected">Castellano</option>
                         <option value="en_US">English</option>

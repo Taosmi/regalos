@@ -3,13 +3,13 @@
 <head>
     <title><? _e('TAOSMI Regalos') ?> - <? _e('Recover password') ?></title>
     <? $this->pattern('/resources') ?>
-    <script type="text/javascript" src="/webapps/regalos.taosmi.es/statics/js/recoverPassword.js"></script>
+    <script type="text/javascript" src="/webapp/statics/js/recoverPassword.js"></script>
 </head>
 <body>
     <main>
         <!-- Gift image -->
         <figure id="logo">
-            <img src="/webapps/regalos.taosmi.es/statics/imgs/regalo01.png" alt="<? _e('TAOSMI Regalos') ?>"/>
+            <img src="/webapp/statics/imgs/regalo01.png" alt="<? _e('TAOSMI Regalos') ?>"/>
         </figure>
 
         <!-- Main title -->

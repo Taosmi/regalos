@@ -3,7 +3,7 @@
 <head>
     <title><? _e('TAOSMI Regalos') ?> - <? _e('Change password') ?></title>
     <? $this->pattern('/resources') ?>
-    <script type="text/javascript" src="/webapps/regalos.taosmi.es/statics/js/changePassword.js"></script>
+    <script type="text/javascript" src="/webapp/statics/js/changePassword.js"></script>
 </head>
 <body>
     <!-- Header and menu -->

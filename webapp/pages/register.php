@@ -3,13 +3,13 @@
 <head>
     <title><? _e('TAOSMI Regalos') ?></title>
     <? $this->pattern('/resources'); ?>
-    <script type="text/javascript" src="/webapps/regalos.taosmi.es/statics/js/register.js"></script>
+    <script type="text/javascript" src="/webapp/statics/js/register.js"></script>
 </head>
 <body>
     <main>
         <!-- Gift image -->
         <figure id="logo">
-            <img src="/webapps/regalos.taosmi.es/statics/imgs/regalo02.png" alt="<? _e('TAOSMI Regalos') ?>"/>
+            <img src="/webapp/statics/imgs/regalo02.png" alt="<? _e('TAOSMI Regalos') ?>"/>
         </figure>
 
         <!-- Main title -->

@@ -3,7 +3,7 @@
 <head>
     <title><? _e('TAOSMI Regalos') ?> - <? _e('Recent community activity') ?></title>
     <? $this->pattern('/resources') ?>
-    <script type="text/javascript" src="/webapps/regalos.taosmi.es/statics/js/news.js"></script>
+    <script type="text/javascript" src="/webapp/statics/js/news.js"></script>
 </head>
 <body>
     <!-- Header and menu -->
@@ -21,9 +21,9 @@
             <p id="info"><? _e('Loading, please wait...') ?></p>
             <ul class="threeCols">
                 <li id="giftTemplate1" class="news">
-                    <img class="user" src="/webapps/regalos.taosmi.es/statics/imgs/users/{userid}"/>
+                    <img class="user" src="/webapp/statics/imgs/users/{userid}"/>
                     <a href="{!link}" class="seenHere" target="_blank">
-                        <? _e('Seen here') ?> <img src="/webapps/regalos.taosmi.es/statics/imgs/link.png">
+                        <? _e('Seen here') ?> <img src="/webapp/statics/imgs/link.png">
                     </a>
                     <p class="user">{username}</p>
                     <p class="date">{createdOn}</p>
@@ -34,9 +34,9 @@
             </ul>
             <ul class="threeCols">
                 <li id="giftTemplate2" class="news">
-                    <img class="user" src="/webapps/regalos.taosmi.es/statics/imgs/users/{userid}"/>
+                    <img class="user" src="/webapp/statics/imgs/users/{userid}"/>
                     <a href="{!link}" class="seenHere" target="_blank">
-                        <? _e('Seen here') ?> <img src="/webapps/regalos.taosmi.es/statics/imgs/link.png">
+                        <? _e('Seen here') ?> <img src="/webapp/statics/imgs/link.png">
                     </a>
                     <p class="user">{username}</p>
                     <p class="date">{createdOn}</p>
@@ -47,9 +47,9 @@
             </ul>
             <ul class="threeCols">
                 <li id="giftTemplate3" class="news">
-                    <img class="user" src="/webapps/regalos.taosmi.es/statics/imgs/users/{userid}"/>
+                    <img class="user" src="/webapp/statics/imgs/users/{userid}"/>
                     <a href="{!link}" class="seenHere target="_blank">
-                        <? _e('Seen here') ?> <img src="/webapps/regalos.taosmi.es/statics/imgs/link.png">
+                        <? _e('Seen here') ?> <img src="/webapp/statics/imgs/link.png">
                     </a>
                     <p class="user">{username}</p>
                     <p class="date">{createdOn}</p>

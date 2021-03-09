@@ -11,7 +11,7 @@ RewriteCond %{REQUEST_URI} ^/runPHP/statics/
 RewriteRule ^ - [L]
 
 # Let the apps static content pass through.
-RewriteCond %{REQUEST_URI} ^/webapps/.*/statics/
+RewriteCond %{REQUEST_URI} ^/webapp/statics/
 RewriteRule ^ - [L]
 
 # Dodge trailing slashes.

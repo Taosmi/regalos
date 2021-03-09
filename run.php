@@ -28,8 +28,7 @@ date_default_timezone_set('UTC');
 // Shortcuts to the framework folders.
 define('SYS', 'runPHP');
 define('SYS_LOCALES', SYS.'/locales');
-define('WEBAPPS', 'webapps');
-define('APP', WEBAPPS.DIRECTORY_SEPARATOR.$_SERVER['SERVER_NAME']);
+define('APP', 'webapp');
 // Set auto-load and error handlers.
 require(SYS.'/handlers.php');
 // Load the I18N framework domain.

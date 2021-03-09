@@ -3,8 +3,8 @@
 <head>
     <title><? _e('TAOSMI Regalos') ?> - <? _e('Wish List') ?></title>
     <? $this->pattern('/resources') ?>
-    <script type="text/javascript" src="/webapps/regalos.taosmi.es/statics/js/component.js"></script>
-    <script type="text/javascript" src="/webapps/regalos.taosmi.es/statics/js/shoplist.js"></script>
+    <script type="text/javascript" src="/webapp/statics/js/component.js"></script>
+    <script type="text/javascript" src="/webapp/statics/js/shoplist.js"></script>
 </head>
 <body>
     <!-- Header and menu -->
@@ -26,14 +26,14 @@
                         <img class="gift" src="{!image}"/>
                     </figure>
                     <a href="{!link}" class="seenHere" target="_blank">
-                        <? _e('Seen here') ?> <img src="/webapps/regalos.taosmi.es/statics/imgs/link.png">
+                        <? _e('Seen here') ?> <img src="/webapp/statics/imgs/link.png">
                     </a>
                     <p class="createdOn"><? _e('Created on') ?> {createdOn}</p>
                     <p class="title">{title}</p>
                     <p class="desc">{description}</p>
                     <a href="/gift/{giftId}" class="button edit"><? _e('Edit') ?></a>
                     <p class="privacy">
-                        <img src="/webapps/regalos.taosmi.es/statics/imgs/{privacy}.png"/>
+                        <img src="/webapp/statics/imgs/{privacy}.png"/>
                         {privacy}
                     </p>
                 </li>

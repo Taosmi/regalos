@@ -3,7 +3,7 @@
 <head>
     <title><? _e('TAOSMI Regalos') ?> - <? _e('Options') ?></title>
     <? $this->pattern('/resources') ?>
-    <script type="text/javascript" src="/webapps/regalos.taosmi.es/statics/js/options.js"></script>
+    <script type="text/javascript" src="/webapp/statics/js/options.js"></script>
 </head>
 <body>
     <!-- Header and menu -->

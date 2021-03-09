@@ -3,7 +3,7 @@
         <a id="news" href="/news" class="<? echo ($opt === 'news' ? 'selected' : '') ?>"><? _e('Activity') ?></a>
         <a id="shoplist" href="/shopList" class="<? echo ($opt === 'shoplist' ? 'selected' : '') ?>"><? _e('Wish List') ?></a>
         <? if ($session) { ?>
-        <a href="#" id="exit" style="background-image:url('/webapps/regalos.taosmi.es/statics/imgs/users/<? echo \runPHP\Session::get('id') ?>')">
+        <a href="#" id="exit" style="background-image:url('/webapp/statics/imgs/users/<? echo \runPHP\Session::get('id') ?>')">
             <span><? _e('Logout') ?></span>
         </a>
         <? } else { ?>

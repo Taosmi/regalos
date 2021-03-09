@@ -72,8 +72,8 @@ class Router {
                 break;
             // View controller (default).
             case 'text/html': case 'html': default:
-                $controller = self::getController(VIEWS, $url);
-                $params = explode('/', substr(VIEWS.$url, strlen($controller) + 1));
+                $controller = self::getController(PAGES, $url);
+                $params = explode('/', substr(PAGES.$url, strlen($controller) + 1));
         }
         // Return the request data.
         return array(
