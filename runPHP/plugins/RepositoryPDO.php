@@ -60,10 +60,13 @@ namespace runPHP\plugins {
         public function __construct ($dsn, $object, $pks = null) {
             try {
                 // Get the DSN connection parameters.
-                list($resource, $user, $pwd) = explode(',', $dsn);
+                // list($resource, $user, $pwd) = explode(',', $dsn);
+                $db = parse_url($dsn);
                 // Get the PDO resource.
                 $start = microtime(true);
-                $this->pdo = new PDO($resource, $user, $pwd);
+                // $this->pdo = new PDO($resource, $user, $pwd);
+                $this->pdo = new PDO('pgsql:'.sprintf('host=%s;port=%s;user=%s;password=%s;dbname=%s',
+                    $db["host"], $db["port"], $db["user"], $db["pass"], ltrim($db["path"], "/")));
                 $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 Logger::repo('Connecting to the DDBB (' . $resource . ')', $start);
                 // Set the repository configuration.
