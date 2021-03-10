@@ -66,9 +66,9 @@ namespace runPHP\plugins {
                 $start = microtime(true);
                 // $this->pdo = new PDO($resource, $user, $pwd);
                 $this->pdo = new PDO('pgsql:' . sprintf('host=%s;port=%s;user=%s;password=%s;dbname=%s',
-                    $db["host"], $db["port"], $db["user"], $db["pass"], ltrim($db["path"], "/")));
+                    $db['host'], $db['port'], $db['user'], $db['pass'], ltrim($db['path'], '/')));
                 $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                Logger::repo('Connecting to the DDBB (' . $db["host"] . ':' . $db["port"] ')', $start);
+                Logger::repo('Connecting to the DDBB (' . $db['host'] . ':' . $db['port'] . ')', $start);
                 // Set the repository configuration.
                 $this->query('SET NAMES utf8');
                 $this->object = $object;
