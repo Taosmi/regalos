@@ -246,7 +246,7 @@ namespace runPHP\plugins {
                 return '';
             }
             $sql = array();
-            while (list($key, $value) = each($filter)) {
+            foreach($filter as $key => $value) {
                 switch ($key) {
                     case 'and':
                         $sql[] = $this->getFilterSQL($value);
