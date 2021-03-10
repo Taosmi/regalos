@@ -89,6 +89,16 @@ namespace runPHP\plugins {
                     'keys' => $this->keys,
                     'helpLink' => 'http://runphp.taosmi.es/faq/rpdo01'
                 ));
+            } catch (Exception $e) {
+                throw new RunException(500, __(), array(
+                    'code' => 'RPDO-00',
+                    'error' => $e->getMessage(),
+                    'dns' => $dsn,
+                    'resource' => $resource,
+                    'table' => $this->table,
+                    'keys' => $this->keys,
+                    'helpLink' => 'http://runphp.taosmi.es/faq/rpdo00'
+                ));
             }
         }
 
