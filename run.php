@@ -40,6 +40,7 @@ session_start();
 try {
 
     // Get and check the application configuration file.
+    define('DATABASE_URL', getenv('DATABASE_URL'));
     $cfg = parse_ini_file(APP.DIRECTORY_SEPARATOR.'app.cfg', true);
     if (!$cfg) {
         throw new RunException(500, __('The configuration file is not available.', 'system'), array(
