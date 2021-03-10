@@ -148,7 +148,7 @@ namespace runPHP\plugins {
         }
 
         public function from ($resource) {
-            $this->table = $resource;
+            $this->table = '"' . $resource . '"';
             return $this;
         }
 
