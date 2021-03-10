@@ -90,7 +90,7 @@ namespace runPHP\plugins {
                     'helpLink' => 'http://runphp.taosmi.es/faq/rpdo01'
                 ));
             } catch (Exception $e) {
-                throw new RunException(500, __(), array(
+                throw new RunException(500, __('The connection to the persistence has failed.', 'system'), array(
                     'code' => 'RPDO-00',
                     'error' => $e->getMessage(),
                     'dns' => $dsn,
