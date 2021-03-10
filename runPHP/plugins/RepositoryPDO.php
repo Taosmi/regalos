@@ -70,7 +70,7 @@ namespace runPHP\plugins {
                 $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 Logger::repo('Connecting to the DDBB (' . $db['host'] . ':' . $db['port'] . ')', $start);
                 // Set the repository configuration.
-                $this->query('SET NAMES utf8');
+                // $this->query('SET NAMES utf8');
                 $this->object = $object;
                 $this->table = substr($object, strrpos($object, '\\') + 1);
                 // Set the primary keys.
