@@ -72,7 +72,7 @@ namespace runPHP\plugins {
                 // Set the repository configuration.
                 // $this->query('SET NAMES utf8');
                 $this->object = $object;
-                $this->table = substr($object, strrpos($object, '\\') + 1);
+                $this->table = '"' . substr($object, strrpos($object, '\\') + 1) . '"';
                 // Set the primary keys.
                 if ($pks) {
                     // Get primary keys from argument.
