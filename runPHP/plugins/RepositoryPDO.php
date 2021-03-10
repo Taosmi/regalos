@@ -65,10 +65,10 @@ namespace runPHP\plugins {
                 // Get the PDO resource.
                 $start = microtime(true);
                 // $this->pdo = new PDO($resource, $user, $pwd);
-                $this->pdo = new PDO('pgsql:'.sprintf('host=%s;port=%s;user=%s;password=%s;dbname=%s',
+                $this->pdo = new PDO('pgsql:' . sprintf('host=%s;port=%s;user=%s;password=%s;dbname=%s',
                     $db["host"], $db["port"], $db["user"], $db["pass"], ltrim($db["path"], "/")));
                 $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                Logger::repo('Connecting to the DDBB (' . $resource . ')', $start);
+                Logger::repo('Connecting to the DDBB (' . $db["host"] . ':' . $db["port"] ')', $start);
                 // Set the repository configuration.
                 $this->query('SET NAMES utf8');
                 $this->object = $object;
@@ -87,20 +87,10 @@ namespace runPHP\plugins {
                 throw new RunException(500, __('The connection to the persistence has failed.', 'system'), array(
                     'code' => 'RPDO-01',
                     'error' => $e->getMessage(),
-                    'resource' => $resource,
+                    'resource' => $db,
                     'table' => $this->table,
                     'keys' => $this->keys,
                     'helpLink' => 'http://runphp.taosmi.es/faq/rpdo01'
-                ));
-            } catch (Exception $e) {
-                throw new RunException(500, __('The connection to the persistence has failed.', 'system'), array(
-                    'code' => 'RPDO-00',
-                    'error' => $e->getMessage(),
-                    'dns' => $dsn,
-                    'resource' => $resource,
-                    'table' => $this->table,
-                    'keys' => $this->keys,
-                    'helpLink' => 'http://runphp.taosmi.es/faq/rpdo00'
                 ));
             }
         }
