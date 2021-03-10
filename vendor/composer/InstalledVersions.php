@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'dca294686bba3c5fd28a930b7ab8b50335532424',
+    'reference' => 'd4d7d2afc6f38c56fc9ee13fba199c9e19fbac8a',
     'name' => '__root__',
   ),
   'versions' => 
@@ -42,25 +42,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'dca294686bba3c5fd28a930b7ab8b50335532424',
-    ),
-    'gettext/gettext' => 
-    array (
-      'pretty_version' => 'v5.5.4',
-      'version' => '5.5.4.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '77baf40326b4eac0230cd11ee75680969dcbe72a',
-    ),
-    'gettext/languages' => 
-    array (
-      'pretty_version' => '2.6.0',
-      'version' => '2.6.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '38ea0482f649e0802e475f0ed19fa993bcb7a618',
+      'reference' => 'd4d7d2afc6f38c56fc9ee13fba199c9e19fbac8a',
     ),
   ),
 );

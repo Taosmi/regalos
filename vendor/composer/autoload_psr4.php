@@ -6,6 +6,4 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Gettext\\Languages\\' => array($vendorDir . '/gettext/languages/src'),
-    'Gettext\\' => array($vendorDir . '/gettext/gettext/src'),
 );

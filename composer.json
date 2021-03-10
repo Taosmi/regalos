@@ -1,5 +1,5 @@
 {
     "require": {
-        "gettext/gettext": "5.5.4"
+        "ext-gettext": "*"
     }
 }
