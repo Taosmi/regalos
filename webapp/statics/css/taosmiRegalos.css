@@ -2,20 +2,20 @@
 
 nav a#news {
 	background-color: #F9CE29;
-	background-image: url('/webapps/regalos.taosmi.es/statics/imgs/bubbleIcon.png');
+	background-image: url('/webapp/statics/imgs/bubbleIcon.png');
 }
 nav a#shoplist {
 	background-color: #E43C0D;
-	background-image: url('/webapps/regalos.taosmi.es/statics/imgs/shopListIcon.png');
+	background-image: url('/webapp/statics/imgs/shopListIcon.png');
 }
 nav a#friends {
 	background-color: #BF4BCF;
-	background-image: url('/webapps/regalos.taosmi.es/statics/imgs/friendsIcon.png');
+	background-image: url('/webapp/statics/imgs/friendsIcon.png');
 	float: right;
 }
 nav a#options {
 	background-color: #93C748;
-	background-image: url('/webapps/regalos.taosmi.es/statics/imgs/optionsIcon.png');
+	background-image: url('/webapp/statics/imgs/optionsIcon.png');
 	float: right;
 }
 nav a#exit {
