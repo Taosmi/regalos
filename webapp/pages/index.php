@@ -46,8 +46,8 @@
 
     <!-- Footer sponsor -->
     <footer id="sponsor">
-        <a href="http://taosmi.es" title="TAOSMI technology TM">
-            <img src="http://taosmi.es/webapps/taosmi.es/statics/imgs/brainTaosmiLogo.gif" alt="Creada por TAOSMI technology TM"/>
+        <a href="https://taosmi.es" title="TAOSMI technology TM">
+            <img src="https://taosmi.es/webapps/taosmi.es/statics/imgs/brainTaosmiLogo.gif" alt="Creada por TAOSMI technology TM"/>
         </a>
     </footer>
 </body>
