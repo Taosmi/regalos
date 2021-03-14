@@ -62,8 +62,8 @@ abstract class ApiController {
             // parse_str(file_get_contents('php://input'), $this->input);
         // } else {
             // $this->input = $_REQUEST;
-        // }
-echo($this->input)
+        }
+        echo($this->input);
     }
 
 
