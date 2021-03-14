@@ -12,7 +12,7 @@
     <main>
         <!-- Main title -->
         <h1><? _e('Gift Manipulation') ?></h1>
-
+<? print_r($_SESSION) ?>
         <!-- Gifts -->
         <section class="card gift">
             <form id="gift" data-giftid="<? echo current($params) ?>">
