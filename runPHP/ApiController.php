@@ -57,6 +57,7 @@ abstract class ApiController {
         $this->request = $request;
         // Get the request input data.
         if ($request['mime'] === 'application/json' && $request['method'] != 'GET') {
+            echo(file_get_contents('php://input'));
             parse_str(file_get_contents('php://input'), $this->input);
         } else {
             $this->input = $_REQUEST;
