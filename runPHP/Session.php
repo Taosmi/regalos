@@ -31,7 +31,6 @@ class Session {
         // Erase previous session data and regenerate the session ID.
         $_SESSION = array();
         session_regenerate_id(true);
-        session_set_cookie_params(null, null, null, true, true);
         // Set the session finger print.
         $_SESSION['fingerprint'] = self::getFingerPrint();
     }
