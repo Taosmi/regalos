@@ -55,9 +55,10 @@ abstract class ApiController {
     public function __construct ($repos, $request) {
         $this->repos = $repos;
         $this->request = $request;
-        // Get the request input data.
+        $this->input = $_REQUEST;
+        // Get the body request input data.
         if ($request['mime'] === 'application/json' && $request['method'] != 'GET') {
-            echo(file_get_contents('php://input'));
+            echo(json_decode(file_get_contents('php://input')), true);
             parse_str(file_get_contents('php://input'), $this->input);
         } else {
             $this->input = $_REQUEST;
