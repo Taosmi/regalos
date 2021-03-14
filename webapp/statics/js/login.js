@@ -42,11 +42,10 @@ $(window).ready(function () {
             method: 'POST',
             url: '/v1/auth',
             contentType: 'application/json; charset=UTF-8',
-            data: {
-                console: 'on',
+            data: JSON.stringify({
                 email: $('#email').val(),
                 pwd: $('#pwd').val()
-            },
+            }),
             success: function () {
                 document.location = '/news';
             },
