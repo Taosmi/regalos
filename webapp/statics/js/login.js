@@ -59,7 +59,7 @@ $(window).ready(function () {
     // Change language event.
     $('#language').change(function () {
         // Set the chosen language in the cookie and reload the page.
-        profun.cookie.write('language', $('#language').val());
+        profun.cookie.write('language', $('#language').val(), null, true);
         document.location.reload(true);
     })
 });
