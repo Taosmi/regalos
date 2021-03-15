@@ -16,7 +16,7 @@ class recover extends ApiController {
      * @return Response        An Ok response.
      * @throws RunException    If the email could not be sent.
      */
-    public function get ($params) {
+    public function get ($session, $params) {
         // Get input data.
         $email = $this->inputGet('email');
         // Find a user by email.

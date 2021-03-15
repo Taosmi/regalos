@@ -16,7 +16,7 @@ class user extends ApiController {
      * @return Response        A response with the user info.
      * @throws RunException    If something goes wrong.
      */
-    public function get ($params) {
+    public function get ($session, $params) {
         // Get a user ID from the URL.
         $id = current($params);
         if (!$id) {
@@ -41,7 +41,7 @@ class user extends ApiController {
      * @return Response        A welcome message.
      * @throws RunException    If something goes wrong.
      */
-    public function post ($params) {
+    public function post ($session, $params) {
         $userRepo = $this->repository('\domain\User');
         // Get input data.
         $name = $this->inputGet('name');
@@ -92,7 +92,7 @@ class user extends ApiController {
      * @return Response        A welcome message.
      * @throws RunException    If something goes wrong.
      */
-    public function put ($params) {
+    public function put ($session, $params) {
         // Get the user data.
         $id = current($params);
         $name = $this->inputGet('name');

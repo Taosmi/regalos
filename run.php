@@ -33,10 +33,11 @@ define('APP', 'webapp');
 require(SYS.'/handlers.php');
 // Load the I18N framework domain.
 I18n::loadDomain('system', SYS_LOCALES);
-// Session initialization.
-plugins\SessionMemcached::init();
 
 try {
+
+    // Session initialization.
+    $session = new  plugins\SessionMemcached();
 
     // Get and check the application configuration file.
     define('DATABASE_URL', getenv('DATABASE_URL'));
@@ -48,7 +49,6 @@ try {
             'helpLink' => 'http://runphp.taosmi.es/faq/rpp001'
         ));
     }
-
     // Shortcuts to the Web Application folders.
     define('APIS', APP.$cfg['PATHS']['apis']);
     define('STATICS', APP.$cfg['PATHS']['statics']);
@@ -80,7 +80,7 @@ try {
 
     // Load and run a controller.
     $controller = Router::getControllerClass($cfg['REPOS'], $request);
-    $response = $controller->main($request['params']);
+    $response = $controller->main($session, $request['params']);
     if (!$response) {
         throw new RunException(500, __('No response is available from the server.'), array(
             'code' => 'RPP-002',

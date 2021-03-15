@@ -16,7 +16,7 @@ class gift extends ApiController {
      * @return Response        An Ok response.
      * @throws RunException    If the gift could not be deleted.
      */
-    public function delete ($params) {
+    public function delete ($session, $params) {
         // Get a gift ID from the URL.
         $giftId = current($params);
         if (!$giftId) {
@@ -53,7 +53,7 @@ class gift extends ApiController {
      * @return Response        A list of gifts.
      * @throws RunException    If the gift could not be retrieved.
      */
-    public function get ($params) {
+    public function get ($session, $params) {
         // Get input data.
         $id = current($params);
         $username = $this->inputGet('username');
@@ -115,7 +115,7 @@ class gift extends ApiController {
      * @return Response        The gift ID.
      * @throws RunException    If the gift could not be created.
      */
-    public function post ($params) {
+    public function post ($session, $params) {
         // Input data.
         $title = $this->inputGet('title');
         $description = $this->inputGet('description');
@@ -159,7 +159,7 @@ class gift extends ApiController {
      * @return Response        An Ok response.
      * @throws RunException    If something goes wrong.
      */
-    public function put ($params) {
+    public function put ($session, $params) {
         // Input data.
         $title = $this->inputGet('title');
         $description = $this->inputGet('description');

@@ -74,20 +74,20 @@ abstract class ApiController {
      * @return Response        A Response with the output data.
      * @throws RunException    If the HTTP verb is not available.
      */
-    public function main ($params = array()) {
+    public function main ($session, $params = array()) {
         switch ($this->request['method']) {
             case 'GET':
                 Logger::sys('Running an API GET method.');
-                return $this->get($params);
+                return $this->get($session, $params);
             case 'PUT':
                  Logger::sys('Running an API PUT method.');
-                return $this->put($params);
+                return $this->put($session, $params);
             case 'POST':
                  Logger::sys('Running an API POST method.');
-                return $this->post($params);
+                return $this->post($session, $params);
             case 'DELETE':
                  Logger::sys('Running an API DELETE method.');
-                return $this->delete($params);
+                return $this->delete($session, $params);
             default:
                 throw new RunException(500, __('The HTTP verb used is not available.'), array(
                     'code' => 'RPP-020',
@@ -104,7 +104,7 @@ abstract class ApiController {
      * @param  array  $params  The parameters.
      * @return Response        A Response with the output data.
      */
-    public function get ($params) {
+    public function get ($session, $params) {
         return new Response(null, 404);
     }
 
@@ -116,7 +116,7 @@ abstract class ApiController {
      * @param  array  $params  The parameters.
      * @return Response        A Response with the output data.
      */
-    public function post ($params) {
+    public function post ($session, $params) {
         return new Response(null, 404);
     }
 
@@ -128,7 +128,7 @@ abstract class ApiController {
      * @param  array  $params  The parameters.
      * @return Response        A Response with the output data.
      */
-    public function put ($params) {
+    public function put ($session, $params) {
         return new Response(null, 404);
     }
 
@@ -140,7 +140,7 @@ abstract class ApiController {
      * @param  array  $params  The parameters.
      * @return Response        A Response with the output data.
      */
-    public function delete ($params) {
+    public function delete ($session, $params) {
         return new Response(null, 404);
     }
 

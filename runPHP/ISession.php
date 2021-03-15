@@ -27,7 +27,7 @@ interface ISession {
      * Authorize the current user. Any previous session data will be erased.
      * The session ID will be regenerated.
      */
-    public static function authorize ();
+    public function authorize ();
 
    /**
      * Get the data for a key on the current session. If there is no session
@@ -36,26 +36,21 @@ interface ISession {
      * @param  string  $key  A key name.
      * @return array         The session data requested or null.
      */
-    public static function get ($key);
+    public function get ($key);
 
     /**
      * Get all the session data. If no session is available return null.
      *
      * @return array  All the session data or null.
      */
-    public static function getAll ();
-
-    /**
-     * Initializes the session.
-     */
-    public static function init ();
+    public function getAll ();
 
     /**
      * Check if the current user has an authorized session.
      *
      * @return boolean  True if the user is authorized, otherwise false.
      */
-    public static function isAuthorized ();
+    public function isAuthorized ();
 
     /**
      * Set a key value pair on the session data.
@@ -63,12 +58,12 @@ interface ISession {
      * @param string  $key    A key name to set on the session.
      * @param object  $value  The corresponding value.
      */
-    public static function set ($key, $value);
+    public function set ($key, $value);
 
     /**
      * Destroy the current authorized session and the cookie session. This
      * method must be executed before any header is sent to the browser.
      */
-    public static function unauthorized ();
+    public function unauthorized ();
 
 }

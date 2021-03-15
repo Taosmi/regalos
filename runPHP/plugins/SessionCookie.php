@@ -24,16 +24,27 @@ use runPHP\ISession;
  */
 class SessionCookie implements ISession {
 
+
+    /**
+     * Initializes de session.
+     */
+    public function __construct () {
+        session_name('rid');
+        session_set_cookie_params(null, null, null, true, true);
+        session_start();
+    }
+
+
     /**
      * Authorize the current user. Any previous session data will be erased.
      * The session ID will be regenerated.
      */
-    public static function authorize () {
+    public function authorize () {
         // Erase previous session data and regenerate the session ID.
         $_SESSION = array();
         session_regenerate_id(true);
         // Set the session finger print.
-        $_SESSION['fingerprint'] = self::getFingerPrint();
+        $_SESSION['fingerprint'] = $this->getFingerPrint();
     }
 
    /**
@@ -43,8 +54,8 @@ class SessionCookie implements ISession {
      * @param  string  $key  A key name.
      * @return array         The session data requested or null.
      */
-    public static function get ($key) {
-        return self::isAuthorized() ? $_SESSION[$key] : null;
+    public function get ($key) {
+        return $this->isAuthorized() ? $_SESSION[$key] : null;
     }
 
     /**
@@ -52,8 +63,8 @@ class SessionCookie implements ISession {
      *
      * @return array  All the session data or null.
      */
-    public static function getAll () {
-        return self::isAuthorized() ? $_SESSION : null;
+    public function getAll () {
+        return $this->isAuthorized() ? $_SESSION : null;
     }
 
     /**
@@ -61,20 +72,11 @@ class SessionCookie implements ISession {
      *
      * @return boolean  True if the user is authorized, otherwise false.
      */
-    public static function isAuthorized () {
+    public function isAuthorized () {
         if (array_key_exists('fingerprint', $_SESSION)) {
-            return ($_SESSION['fingerprint'] === self::getFingerPrint());
+            return ($_SESSION['fingerprint'] === $this->getFingerPrint());
         }
         return false;
-    }
-
-    /**
-     * Initializes de session.
-     */
-    public static function init () {
-        session_name('rid');
-        session_set_cookie_params(null, null, null, true, true);
-        session_start();
     }
 
     /**
@@ -83,8 +85,8 @@ class SessionCookie implements ISession {
      * @param string  $key    A key name to set on the session.
      * @param object  $value  The corresponding value.
      */
-    public static function set ($key, $value) {
-        if (self::isAuthorized()) {
+    public function set ($key, $value) {
+        if ($this->isAuthorized()) {
             $_SESSION[$key] = $value;
         }
     }
@@ -93,7 +95,7 @@ class SessionCookie implements ISession {
      * Destroy the current authorized session and the cookie session. This
      * method must be executed before any header is sent to the browser.
      */
-    public static function unauthorized () {
+    public function unauthorized () {
         // Erase the session cookie.
         if (isset($_COOKIE[session_name()])) {
             $ckData = session_get_cookie_params();
@@ -110,7 +112,7 @@ class SessionCookie implements ISession {
      *
      * @return string  The current finger print.
      */
-    private static function getFingerPrint () {
+    private function getFingerPrint () {
         return sha1(APP.$_SERVER['HTTP_USER_AGENT'].$_SERVER['REMOTE_ADDR']);
     }
 

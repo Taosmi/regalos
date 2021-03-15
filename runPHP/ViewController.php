@@ -28,13 +28,14 @@ class ViewController {
     /**
      * Main function.
      *
-     * @param  array  $params  The parameters when the URL is a backward URL.
-     * @return object          A response.
+     * @param  session  $session  Session info.
+     * @param  array    $params   The parameters when the URL is a backward URL.
+     * @return object             A response.
      */
-    public function main ($params = null) {
-        // Include the session data and set the HTML fil.
+    public function main ($session, $params = null) {
+        // Include the session data and set the HTML file.
         $response = new Response(array(
-            'session' => Session::getAll(),
+            'session' => $session.getAll(),
             'params' => $params
         ));
         $response->setFile($this->request['ctrl']);

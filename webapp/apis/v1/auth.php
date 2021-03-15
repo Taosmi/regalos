@@ -15,7 +15,7 @@ class auth extends ApiController {
      * @param  array  $params  The request parameters.
      * @return Response        An Ok response if the user is authorize.
      */
-    public function delete ($params) {
+    public function delete ($session, $params) {
         // Unauthorize the current session.
         Session::unauthorized();
         // Return an Ok response.
@@ -31,7 +31,7 @@ class auth extends ApiController {
      * @return Response        An Ok response if the user is authorize.
      * @throws RunException    If the user could not be authorize.
      */
-    public function post ($params) {
+    public function post ($session, $params) {
         // Get input data.
         $email = $this->inputGet('email');
         $password = $this->inputGet('pwd');
