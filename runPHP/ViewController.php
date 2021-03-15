@@ -35,7 +35,7 @@ class ViewController {
     public function main ($session, $params = null) {
         // Include the session data and set the HTML file.
         $response = new Response(array(
-            'session' => $session.getAll(),
+            'session' => $session->getAll(),
             'params' => $params
         ));
         $response->setFile($this->request['ctrl']);
