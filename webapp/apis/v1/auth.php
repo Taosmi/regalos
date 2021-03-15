@@ -17,7 +17,7 @@ class auth extends ApiController {
      */
     public function delete ($session, $params) {
         // Unauthorize the current session.
-        Session::unauthorized();
+        $session->unauthorized();
         // Return an Ok response.
         return new Response(array(
             'result' => 'ok'
@@ -49,9 +49,9 @@ class auth extends ApiController {
         $user->connectedOn = date('Y-m-d H:i:s');
         $userRepo->select('connectedOn')->modify($user);
         // Authorize the user.
-        Session::authorize();
-        Session::set('id', $user->id);
-        Session::set('name', $user->name);
+        $session->authorize();
+        $session->set('id', $user->id);
+        $session->set('name', $user->name);
         // Return an Ok response.
         return new Response(array(
             'result' => 'ok'
