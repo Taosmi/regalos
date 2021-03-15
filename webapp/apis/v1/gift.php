@@ -73,7 +73,7 @@ class gift extends ApiController {
                 throw new RunException(400, __('The gift does not exist'));
             }
             // Check the privacy.
-            if (($gift->privacy === 'private') and (Session::get('id') != $gift->userid)) {
+            if (($gift->privacy === 'private') and ($session->get('id') != $gift->userid)) {
                 throw new RunException(400, __('The gift does not exist'));
             }
             // Return the gift.
@@ -90,7 +90,7 @@ class gift extends ApiController {
             // Get other users gifts that current user may see.
             $list = $giftRepo->find(array(
                 'status' => eq('active'),
-                'userId' => ne(Session::get('id')),
+                'userId' => ne($session->get('id')),
                 'or' => array(
                     'privacy' => eq('public')//,  'privacy' => like('%'.Session::get('id').'%')
                 )
@@ -129,7 +129,7 @@ class gift extends ApiController {
         // Store the image.
         if ($image) {
             // Get a name for the gift image and process the image raw data to a file on the server.
-            $imgName = Session::get('name') . '_' . mt_rand() . '.' . $this->getImageFormat($image);
+            $imgName = $session->get('name') . '_' . mt_rand() . '.' . $this->getImageFormat($image);
             $data = $this->getImage($image);
             file_put_contents(STATICS . '/imgs/gifts/' . $imgName, $data);
         }
@@ -140,8 +140,8 @@ class gift extends ApiController {
         $gift->image = $image ? '/'.STATICS.'/imgs/gifts/'.$imgName : null;
         $gift->link = $link;
         $gift->privacy = $privacy;
-        $gift->userid = Session::get('id');
-        $gift->username = Session::get('name');
+        $gift->userid = $session->get('id');
+        $gift->username = $session->get('name');
         $gift->status = 'active';
         // Store the gift.
         $giftRepo = $this->repository('\domain\Gift');
@@ -180,7 +180,7 @@ class gift extends ApiController {
             return new Response(400, __('The gift is not available'));
         }
         // Check the gift owner is the current user.
-        if ($gift->userid != Session::get('id')) {
+        if ($gift->userid != $session->get('id')) {
             return new Response(401, __('The gift is not available'));
         }
         // Store the image.
@@ -191,7 +191,7 @@ class gift extends ApiController {
                 $imgName = substr($image, strlen('/' . STATICS . '/imgs/gifts/'));
             } else {
                 // Get a new image name.
-                $imgName = Session::get('name') . '_' . mt_rand() . '.' . $this->getImageFormat($image);
+                $imgName = $session->get('name') . '_' . mt_rand() . '.' . $this->getImageFormat($image);
             }
             // Get the image raw data and save it on the server.
             $data = $this->getImage($image);
