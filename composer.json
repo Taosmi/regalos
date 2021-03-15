@@ -1,5 +1,6 @@
 {
     "require": {
-        "ext-gettext": "*"
+        "ext-gettext": "*",
+        "ext-memcached": "*"
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
-namespace runPHP;
+namespace runPHP\Plugins;
+use runPHP\ISession;
 
 /**
  * Manage user authentication and session data storage.
@@ -21,7 +22,7 @@ namespace runPHP;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class Session {
+class SessionCookie implements ISession {
 
     /**
      * Authorize the current user. Any previous session data will be erased.
@@ -68,6 +69,15 @@ class Session {
     }
 
     /**
+     * Initializes de session.
+     */
+    public static function init () {
+        session_name('rid');
+        session_set_cookie_params(null, null, null, true, true);
+        session_start();
+    }
+
+    /**
      * Set a key value pair on the session data.
      * 
      * @param string  $key    A key name to set on the session.
@@ -103,4 +113,5 @@ class Session {
     private static function getFingerPrint () {
         return sha1(APP.$_SERVER['HTTP_USER_AGENT'].$_SERVER['REMOTE_ADDR']);
     }
+
 }

@@ -34,9 +34,7 @@ require(SYS.'/handlers.php');
 // Load the I18N framework domain.
 I18n::loadDomain('system', SYS_LOCALES);
 // Session initialization.
-session_name('rid');
-session_set_cookie_params(null, null, null, true, true);
-session_start();
+Plugins\SessionMemcached::init();
 
 try {
 
