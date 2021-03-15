@@ -3,6 +3,7 @@
 namespace runPHP\plugins;
 use runPHP\ISession;
 use MemCachier\MemcacheSASL;
+use \Memcached;
 
 /**
  * Manage user authentication and session data storage.
