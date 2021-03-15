@@ -1,6 +1,6 @@
 <?php
 
-namespace runPHP\Plugins;
+namespace runPHP\plugins;
 use runPHP\ISession;
 use MemCachier\MemcacheSASL;
 
