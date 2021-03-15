@@ -54,6 +54,7 @@ class gift extends ApiController {
      * @throws RunException    If the gift could not be retrieved.
      */
     public function get ($session, $params) {
+        print_r($session->getAll());
         // Get input data.
         $id = current($params);
         $username = $this->inputGet('username');
