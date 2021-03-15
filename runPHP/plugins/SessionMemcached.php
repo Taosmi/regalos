@@ -51,6 +51,8 @@ class SessionMemcached implements ISession  {
             $m->addServers($servers);
         }
         // Enable MemCachier session support
+        session_name('rid');
+        session_set_cookie_params(null, null, null, true, true);
         session_start();
     }
 
