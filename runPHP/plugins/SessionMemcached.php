@@ -26,29 +26,34 @@ use \Memcached;
  */
 class SessionMemcached implements ISession  {
 
+    /**
+     * @var Memcache  Memcache object.
+    */
+    private $m;
+
 
     public function __construct () {
         // Using Memcached client.
-        $m = new Memcached("memcached_pool");
-        $m->setOption(Memcached::OPT_BINARY_PROTOCOL, TRUE);
+        $this->m = new Memcached("memcached_pool");
+        $this->m->setOption(Memcached::OPT_BINARY_PROTOCOL, TRUE);
         // Enable no-block for some performance gains but less certainty that data has been stored.
-        $m->setOption(Memcached::OPT_NO_BLOCK, TRUE);
+        $this->m->setOption(Memcached::OPT_NO_BLOCK, TRUE);
         // Failover automatically when host fails.
-        $m->setOption(Memcached::OPT_AUTO_EJECT_HOSTS, TRUE);
+        $this->m->setOption(Memcached::OPT_AUTO_EJECT_HOSTS, TRUE);
         // Adjust timeouts.
-        $m->setOption(Memcached::OPT_CONNECT_TIMEOUT, 2000);
-        $m->setOption(Memcached::OPT_POLL_TIMEOUT, 2000);
-        $m->setOption(Memcached::OPT_RETRY_TIMEOUT, 2);
+        $this->m->setOption(Memcached::OPT_CONNECT_TIMEOUT, 2000);
+        $this->m->setOption(Memcached::OPT_POLL_TIMEOUT, 2000);
+        $this->m->setOption(Memcached::OPT_RETRY_TIMEOUT, 2);
         // SASL config.
-        $m->setSaslAuthData(getenv("MEMCACHIER_USERNAME"), getenv("MEMCACHIER_PASSWORD"));
+        $this->m->setSaslAuthData(getenv("MEMCACHIER_USERNAME"), getenv("MEMCACHIER_PASSWORD"));
         // Add in the servers first time.
-        if (!$m->getServerList()) {
+        if (!$this->m->getServerList()) {
             // Parse config.
             $servers = explode(",", getenv("MEMCACHIER_SERVERS"));
             for ($i = 0; $i < count($servers); $i++) {
                 $servers[$i] = explode(":", $servers[$i]);
             }
-            $m->addServers($servers);
+            $this->m->addServers($servers);
         }
         // Enable MemCachier session support
         session_name('rid');
