@@ -96,6 +96,11 @@ class gift extends ApiController {
                 )
             ), '"createdOn" desc');
 print_r($list);
+        for ($i=0; $i<count($list); $i += 1) {
+            if ($list[$i]) {
+                print_r(stream_get_contents($list[$i]['DATA_FILE']));
+            }
+        }
             //'condition' => 'status = "active" and userId != "'.$userId.'" and (privacy = "public" or privacy like "%,'.$userId.',%")'.$userFilter,
             //$userFilter = $username ? ' and username like "'.$username.'%"' : '';
         }
