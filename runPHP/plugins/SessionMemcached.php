@@ -73,10 +73,10 @@ class SessionMemcached implements ISession  {
         session_set_cookie_params(null, null, null, true, true);
         session_start();
         $this->key = session_id();
-        Logger::sys(__('Session set with key "%s".', 'system'), $this->key);
-        $this->session = $this->mem->get($this->key);
 print_r($this->key);
-print_r($this->mem->get($this->key));
+        Logger::sys(__('Session set with key "%s".', 'system'), $this->key);
+        $this->session = $this->mem->get($this->key) ?: array();
+print_r($this->session);
         Logger::sys(__('Session data retrieved: "%s".', 'system'), $this->session);
     }
 
