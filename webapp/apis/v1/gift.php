@@ -100,6 +100,8 @@ print_r($list);
             if ($list[$i]) {
                 print_r(stream_get_contents($list[$i]['DATA_FILE']));
             }
+            print_r($i);
+            print($list[$i]);
         }
             //'condition' => 'status = "active" and userId != "'.$userId.'" and (privacy = "public" or privacy like "%,'.$userId.',%")'.$userFilter,
             //$userFilter = $username ? ' and username like "'.$username.'%"' : '';
