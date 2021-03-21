@@ -36,9 +36,6 @@ I18n::loadDomain('system', SYS_LOCALES);
 
 try {
 
-    // Session initialization.
-    $session = new  plugins\SessionMemcached();
-
     // Get and check the application configuration file.
     define('DATABASE_URL', getenv('DATABASE_URL'));
     $cfg = parse_ini_file(APP.DIRECTORY_SEPARATOR.'app.cfg', true);
@@ -77,6 +74,9 @@ try {
             'helpLink' => 'http://runphp.taosmi.es/faq/rpp00?'
         ));
     }
+
+    // Session initialization.
+    $session = new  plugins\SessionMemcached();
 
     // Load and run a controller.
     $controller = Router::getControllerClass($cfg['REPOS'], $request);
