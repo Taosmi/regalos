@@ -15,7 +15,7 @@
 
         <!-- Gifts -->
         <section class="card user">
-            <form id="user" data-id="<? echo \runPHP\Session::get('id') ?>">
+            <form id="user" data-id="<? echo $session['id'] ?>">
                 <fieldset>
                     <ul class="twoCols">
                         <li>
