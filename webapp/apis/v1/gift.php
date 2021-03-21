@@ -1,7 +1,7 @@
 <?php
 
 namespace apis\v1;
-use runPHP\ApiController, runPHP\Session, runPHP\Response, runPHP\RunException, runPHP\Logger;
+use runPHP\ApiController, runPHP\Response, runPHP\RunException, runPHP\Logger;
 use domain\Gift as oGift;
 
 /**
@@ -31,7 +31,7 @@ class gift extends ApiController {
             throw new RunException(400, __('The gift does not exist'));
         }
         // Check the current user is the gift owner.
-        if ($gift->userid != Session::get('id')) {
+        if ($gift->userid != $session->get('id')) {
             throw new RunException(400, __('The gift does not exist'));
         }
         // Delete the gift.
@@ -54,7 +54,6 @@ class gift extends ApiController {
      * @throws RunException    If the gift could not be retrieved.
      */
     public function get ($session, $params) {
-        print_r($session->getAll());
         // Get input data.
         $id = current($params);
         $username = $this->inputGet('username');
@@ -85,7 +84,7 @@ class gift extends ApiController {
             // Get the gifts owned by the current user.
             $list = $giftRepo->find(array(
                 'status' => eq('active'),
-                'userid' => eq(Session::get('id'))
+                'userid' => eq($session->get('id'))
             ));
         } else {
             // Get other users gifts that current user may see.

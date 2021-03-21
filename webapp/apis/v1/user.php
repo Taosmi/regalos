@@ -101,7 +101,7 @@ class user extends ApiController {
         $policy = $this->inputGet('policy');
         $image = $this->inputGet('image');
         // Check the ID is equal to the session ID.
-        if ($id != Session::get('id')) {
+        if ($id != $session->get('id')) {
             throw new RunException(400, __('The user is not available'));
         }
         // Check the user already exist.

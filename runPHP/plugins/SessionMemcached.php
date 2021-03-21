@@ -87,7 +87,7 @@ class SessionMemcached implements ISession  {
         // Regenerate the session ID.
         $this->mem->delete($this->key);
         session_regenerate_id(true);
-        $this->key = session_id();;
+        $this->key = session_id();
         // Reset memcached session.
         $this->session = array();
         $this->session['fingerprint'] = $this->getFingerPrint();
