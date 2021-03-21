@@ -255,7 +255,7 @@ namespace runPHP\plugins {
                         $sql[] = '('.$this->getFilterSQL($value, ' OR ').')';
                         break;
                     default:
-                        $sql[] = $key . $value;
+                        $sql[] = '"' . $key . '"' . $value;
                 }
             }
             return implode($join, $sql);
