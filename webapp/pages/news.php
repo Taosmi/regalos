@@ -21,7 +21,7 @@
             <p id="info"><? _e('Loading, please wait...') ?></p>
             <ul class="threeCols">
                 <li id="giftTemplate1" class="news">
-                    <img class="user" src="/webapp/statics/imgs/users/{userid}"/>
+                    <img class="user" src="/webapp/statics/imgs/users/{userId}"/>
                     <a href="{!link}" class="seenHere" target="_blank">
                         <? _e('Seen here') ?> <img src="/webapp/statics/imgs/link.png">
                     </a>
@@ -34,7 +34,7 @@
             </ul>
             <ul class="threeCols">
                 <li id="giftTemplate2" class="news">
-                    <img class="user" src="/webapp/statics/imgs/users/{userid}"/>
+                    <img class="user" src="/webapp/statics/imgs/users/{userId}"/>
                     <a href="{!link}" class="seenHere" target="_blank">
                         <? _e('Seen here') ?> <img src="/webapp/statics/imgs/link.png">
                     </a>
@@ -47,7 +47,7 @@
             </ul>
             <ul class="threeCols">
                 <li id="giftTemplate3" class="news">
-                    <img class="user" src="/webapp/statics/imgs/users/{userid}"/>
+                    <img class="user" src="/webapp/statics/imgs/users/{userId}"/>
                     <a href="{!link}" class="seenHere target="_blank">
                         <? _e('Seen here') ?> <img src="/webapp/statics/imgs/link.png">
                     </a>
