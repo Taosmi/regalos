@@ -294,7 +294,7 @@ namespace runPHP\plugins {
                 : array_keys(get_object_vars($item));
             // Create the key - value pair string.
             foreach ($keys as $key) {
-                $query .= $key . '=\'' . $item->$key . '\'' . $join;
+                $query .= '"' . $key . '"=\'' . $item->$key . '\'' . $join;
             }
             return rtrim($query, $join);
         }
