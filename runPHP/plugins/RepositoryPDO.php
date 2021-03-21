@@ -255,7 +255,7 @@ namespace runPHP\plugins {
                         $sql[] = '('.$this->getFilterSQL($value, ' OR ').')';
                         break;
                     default:
-                        $sql[] = $key . $value;
+                        $sql[] = '"' . $key . '"' . $value;
                 }
             }
             return implode($join, $sql);
@@ -294,7 +294,7 @@ namespace runPHP\plugins {
                 : array_keys(get_object_vars($item));
             // Create the key - value pair string.
             foreach ($keys as $key) {
-                $query .= $key . '=\'' . $item->$key . '\'' . $join;
+                $query .= '"' . $key . '"=\'' . $item->$key . '\'' . $join;
             }
             return rtrim($query, $join);
         }
