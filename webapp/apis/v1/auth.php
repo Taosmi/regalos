@@ -1,7 +1,7 @@
 <?php
 
 namespace apis\v1;
-use runPHP\ApiController, runPHP\Session, runPHP\Response, runPHP\RunException;
+use runPHP\ApiController, runPHP\Response, runPHP\RunException;
 use domain\User;
 
 /**

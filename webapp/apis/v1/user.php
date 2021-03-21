@@ -23,7 +23,7 @@ class user extends ApiController {
             throw new RunException(400, __('The user ID is mandatory'));
         }
         // Get the user from the repository.
-        $userRepo = $this->repository('\domain\User');
+        $userRepo = $this->repository('domain\User');
         $user = $userRepo->findOne(array(
             'id' => eq($id),
             'status' => eq('active')
@@ -42,7 +42,7 @@ class user extends ApiController {
      * @throws RunException    If something goes wrong.
      */
     public function post ($session, $params) {
-        $userRepo = $this->repository('\domain\User');
+        $userRepo = $this->repository('domain\User');
         // Get input data.
         $name = $this->inputGet('name');
         $email = $this->inputGet('email');
@@ -105,7 +105,7 @@ class user extends ApiController {
             throw new RunException(400, __('The user is not available'));
         }
         // Check the user already exist.
-        $userRepo = $this->repository('\domain\User');
+        $userRepo = $this->repository('domain\User');
         $user = $userRepo->findOne(array(
             'id' => eq($id),
             'status' => eq('active')

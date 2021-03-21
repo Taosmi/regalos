@@ -23,7 +23,7 @@ class gift extends ApiController {
             throw new RunException(400, __('The gift ID is mandatory'));
         }
         // Check the gift exists.
-        $giftRepo = $this->repository('\domain\Gift');
+        $giftRepo = $this->repository('domain\Gift');
         $gift = $giftRepo->findOne(array(
             'giftId' => eq($giftId)
         ));
@@ -144,7 +144,7 @@ class gift extends ApiController {
         $gift->username = $session->get('name');
         $gift->status = 'active';
         // Store the gift.
-        $giftRepo = $this->repository('\domain\Gift');
+        $giftRepo = $this->repository('domain\Gift');
         $gift = $giftRepo->add($gift);
         // Return the gift ID.
         return new Response(array(
@@ -172,7 +172,7 @@ class gift extends ApiController {
             throw new RunException(400, __('The gift ID is mandatory'));
         }
         // Check the gift already exists.
-        $giftRepo = $this->repository('\domain\Gift');
+        $giftRepo = $this->repository('domain\Gift');
         $gift = $giftRepo->findOne(array(
             'giftId' => eq($giftId)
         ));
@@ -186,7 +186,7 @@ class gift extends ApiController {
         // Store the image.
         if ($image) {
             // Get the image name.
-            if (strrpos($image, '/webapps') === 0) {
+            if (strrpos($image, '/' . STATICS) === 0) {
                 // The image is already in the server.
                 $imgName = substr($image, strlen('/' . STATICS . '/imgs/gifts/'));
             } else {
@@ -223,7 +223,7 @@ class gift extends ApiController {
         if (strrpos($image, 'http') === 0) {
             // Get the image data from URL.
             $data = file_get_contents($image);
-        } else if (strrpos($image, '/webapps/') === 0) {
+        } else if (strrpos($image, '/'.APP.'/') === 0) {
             $data = file_get_contents(substr($image, 1));
         } else {
             // Get the image data uploaded from browser.
@@ -240,7 +240,7 @@ class gift extends ApiController {
         if (strrpos($image, 'http') === 0) {
             // Get the image format from a URL.
             return substr($image, -(strlen($image) - strrpos($image, '.')));
-        } else if (strrpos($image, '/webapps/') === 0) {
+        } else if (strrpos($image, '/'.APP.'/') === 0) {
             return substr($image, -(strlen($image) - strrpos($image, '.')));
         } else {
             // Get the image format from data uploaded from browser.
