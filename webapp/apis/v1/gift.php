@@ -186,7 +186,7 @@ class gift extends ApiController {
         // Store the image.
         if ($image) {
             // Get the image name.
-            if (strrpos($image, '/' . STATICS) === 0) {
+            if (strrpos($image, '/' . APP) === 0) {
                 // The image is already in the server.
                 $imgName = substr($image, strlen('/' . STATICS . '/imgs/gifts/'));
             } else {
