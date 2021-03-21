@@ -1,7 +1,8 @@
 <?php
 
 namespace runPHP\plugins;
-use runPHP\ISession;
+
+use runPHP\ISession, runPHP\Logger;
 use MemCachier\MemcacheSASL;
 use \Memcached;
 
