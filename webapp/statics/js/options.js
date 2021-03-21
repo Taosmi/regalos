@@ -36,7 +36,7 @@ var modifyUser= function (id) {
                     $('#month').val(birthday[1]);
                     $('#day').val(birthday[2]);
                     $('#policy').prop('checked', (data.user.policy === 'Y'));
-                    $('#loadAvatar').css('background-image','url(/webapps/regalos.taosmi.es/statics/imgs/users/' + id + ')');
+                    $('#loadAvatar').css('background-image','url(/webapp/statics/imgs/users/' + id + ')');
                 }
             },
             error: function (data) {
