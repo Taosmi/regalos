@@ -8,7 +8,7 @@ namespace domain;
  */
 class Gift {
 
-    public $giftId, $title, $description, $image, $link, $userid, $username, $status, $createdOn, $privacy;
+    public $giftId, $title, $description, $image, $link, $userId, $username, $status, $createdOn, $privacy;
 
     /**
      * Create a new gift.
