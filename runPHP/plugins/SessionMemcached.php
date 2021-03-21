@@ -121,6 +121,7 @@ class SessionMemcached implements ISession  {
      */
     public function isAuthorized () {
         if (array_key_exists('fingerprint', $this->session)) {
+            Logger::sys(__('Session fingerprint match is %s (stored:"%s" shoud be "%s").', 'system'), $this->session['fingerprint'] === $this->getFingerPrint(), $this->session['fingerprint'], $this->getFingerPrint());
             return ($this->session['fingerprint'] === $this->getFingerPrint());
         }
         return false;
