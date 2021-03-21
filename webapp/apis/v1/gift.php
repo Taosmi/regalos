@@ -95,11 +95,11 @@ class gift extends ApiController {
                     'privacy' => eq('public')//,  'privacy' => like('%'.Session::get('id').'%')
                 )
             ), '"createdOn" desc');
-print_r($list);
-        for ($i=0; $i<count($list); $i += 1) {
-            if ($list[$i]) {
-                print_r(stream_get_contents($list[$i]['DATA_FILE']));
-            }
+// print_r($list);
+        for ($i=0; $i<count($list); $i++) {
+            // if ($list[$i]) {
+            //     print_r(stream_get_contents($list[$i]['DATA_FILE']));
+            // }
             print_r($i);
             print($list[$i]);
         }
