@@ -163,6 +163,7 @@ class SessionMemcached implements ISession  {
      * @return string  The current finger print.
      */
     private function getFingerPrint () {
+        Logger::sys(__('Session fingerprint has value: "%s".', 'system'), APP.$_SERVER['HTTP_USER_AGENT'].$_SERVER['REMOTE_ADDR']);
         return sha1(APP.$_SERVER['HTTP_USER_AGENT'].$_SERVER['REMOTE_ADDR']);
     }
 
