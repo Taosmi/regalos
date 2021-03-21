@@ -31,7 +31,7 @@ class gift extends ApiController {
             throw new RunException(400, __('The gift does not exist'));
         }
         // Check the current user is the gift owner.
-        if ($gift->userid != $session->get('id')) {
+        if ($gift->userId != $session->get('id')) {
             throw new RunException(400, __('The gift does not exist'));
         }
         // Delete the gift.
@@ -73,7 +73,7 @@ class gift extends ApiController {
                 throw new RunException(400, __('The gift does not exist'));
             }
             // Check the privacy.
-            if (($gift->privacy === 'private') and ($session->get('id') != $gift->userid)) {
+            if (($gift->privacy === 'private') and ($session->get('id') != $gift->userId)) {
                 throw new RunException(400, __('The gift does not exist'));
             }
             // Return the gift.
@@ -84,7 +84,7 @@ class gift extends ApiController {
             // Get the gifts owned by the current user.
             $list = $giftRepo->find(array(
                 'status' => eq('active'),
-                'userid' => eq($session->get('id'))
+                'userId' => eq($session->get('id'))
             ));
         } else {
             // Get other users gifts that current user may see.
@@ -140,7 +140,7 @@ class gift extends ApiController {
         $gift->image = $image ? '/'.STATICS.'/imgs/gifts/'.$imgName : null;
         $gift->link = $link;
         $gift->privacy = $privacy;
-        $gift->userid = $session->get('id');
+        $gift->userId = $session->get('id');
         $gift->username = $session->get('name');
         $gift->status = 'active';
         // Store the gift.
@@ -180,7 +180,7 @@ class gift extends ApiController {
             return new Response(400, __('The gift is not available'));
         }
         // Check the gift owner is the current user.
-        if ($gift->userid != $session->get('id')) {
+        if ($gift->userId != $session->get('id')) {
             return new Response(401, __('The gift is not available'));
         }
         // Store the image.
