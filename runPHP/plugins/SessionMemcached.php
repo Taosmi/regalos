@@ -165,7 +165,8 @@ class SessionMemcached implements ISession  {
     private function getFingerPrint () {
         $ipAddress = $_SERVER['REMOTE_ADDR'];
         if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            $ipAddress = trim(end(explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']))) ;
+            $ipAddresses = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+            $ipAddress = trim(end($ipAddresses));
         }
         Logger::sys(__('Session fingerprint has value: "%s".', 'system'), APP.$_SERVER['HTTP_USER_AGENT'].$ipAddress);
         return sha1(APP.$_SERVER['HTTP_USER_AGENT'].$ipAddress);
