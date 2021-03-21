@@ -77,7 +77,7 @@ print_r($this->key);
         Logger::sys(__('Session set with key "%s".', 'system'), $this->key);
         $this->session = $this->mem->get($this->key) ?: array();
 print_r($this->session);
-        Logger::sys(__('Session data retrieved: "%s".', 'system'), $this->session);
+        Logger::sys(__('Session data retrieved: "%s".', 'system'), serialize($this->session));
     }
 
 
