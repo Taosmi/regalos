@@ -27,38 +27,53 @@ use \Memcached;
 class SessionMemcached implements ISession  {
 
     /**
+     * @var string  Session ID on memcached.
+     */
+    private $key;
+
+    /**
      * @var Memcache  Memcache object.
     */
-    private $m;
+    private $mem;
+
+    /**
+     * @var array  Session info.
+     */
+    private $session = array();
 
 
     public function __construct () {
+        Logger::sys(__('Init memcached server "%s" ...', 'system'), getenv("MEMCACHIER_SERVERS"));
         // Using Memcached client.
-        $this->m = new Memcached("memcached_pool");
-        $this->m->setOption(Memcached::OPT_BINARY_PROTOCOL, TRUE);
+        $this->mem = new Memcached("memcached_pool");
+        $this->mem->setOption(Memcached::OPT_BINARY_PROTOCOL, TRUE);
         // Enable no-block for some performance gains but less certainty that data has been stored.
-        $this->m->setOption(Memcached::OPT_NO_BLOCK, TRUE);
+        $this->mem->setOption(Memcached::OPT_NO_BLOCK, TRUE);
         // Failover automatically when host fails.
-        $this->m->setOption(Memcached::OPT_AUTO_EJECT_HOSTS, TRUE);
+        $this->mem->setOption(Memcached::OPT_AUTO_EJECT_HOSTS, TRUE);
         // Adjust timeouts.
-        $this->m->setOption(Memcached::OPT_CONNECT_TIMEOUT, 2000);
-        $this->m->setOption(Memcached::OPT_POLL_TIMEOUT, 2000);
-        $this->m->setOption(Memcached::OPT_RETRY_TIMEOUT, 2);
+        $this->mem->setOption(Memcached::OPT_CONNECT_TIMEOUT, 2000);
+        $this->mem->setOption(Memcached::OPT_POLL_TIMEOUT, 2000);
+        $this->mem->setOption(Memcached::OPT_RETRY_TIMEOUT, 2);
         // SASL config.
-        $this->m->setSaslAuthData(getenv("MEMCACHIER_USERNAME"), getenv("MEMCACHIER_PASSWORD"));
+        $this->mem->setSaslAuthData(getenv("MEMCACHIER_USERNAME"), getenv("MEMCACHIER_PASSWORD"));
         // Add in the servers first time.
-        if (!$this->m->getServerList()) {
+        if (!$this->mem->getServerList()) {
             // Parse config.
             $servers = explode(",", getenv("MEMCACHIER_SERVERS"));
             for ($i = 0; $i < count($servers); $i++) {
                 $servers[$i] = explode(":", $servers[$i]);
             }
-            $this->m->addServers($servers);
+            $this->mem->addServers($servers);
         }
-        // Enable MemCachier session support
-        session_name('rid');
+        Logger::sys(__('Init memcached server Ok.', 'system'));
+        // Inits memcached session.
+        session_name('taosmi');
         session_set_cookie_params(null, null, null, true, true);
         session_start();
+        $this->key = session_id();
+        $this->session = $this->mem->get($this->key);
+        Logger::sys(__('Session set with key "%s".', 'system'), $this->key);
     }
 
 
@@ -67,11 +82,14 @@ class SessionMemcached implements ISession  {
      * The session ID will be regenerated.
      */
     public function authorize () {
-        // Erase previous session data and regenerate the session ID.
-        $_SESSION = array();
+        // Regenerate the session ID.
+        $this->mem->delete($this->key);
         session_regenerate_id(true);
-        // Set the session finger print.
-        $_SESSION['fingerprint'] = $this->getFingerPrint();
+        $this->key = session_id();;
+        // Reset memcached session.
+        $this->session = array();
+        $this->session['fingerprint'] = $this->getFingerPrint();
+        $this->mem->add($this->key, $this->session);
     }
 
    /**
@@ -82,7 +100,7 @@ class SessionMemcached implements ISession  {
      * @return array         The session data requested or null.
      */
     public function get ($key) {
-        return $this->isAuthorized() ? $_SESSION[$key] : null;
+        return $this->isAuthorized() ? $this->session[$key] : null;
     }
 
     /**
@@ -91,7 +109,7 @@ class SessionMemcached implements ISession  {
      * @return array  All the session data or null.
      */
     public function getAll () {
-        return $this->isAuthorized() ? $_SESSION : null;
+        return $this->isAuthorized() ? $this->session : null;
     }
 
     /**
@@ -100,8 +118,8 @@ class SessionMemcached implements ISession  {
      * @return boolean  True if the user is authorized, otherwise false.
      */
     public function isAuthorized () {
-        if (array_key_exists('fingerprint', $_SESSION)) {
-            return ($_SESSION['fingerprint'] === $this->getFingerPrint());
+        if (array_key_exists('fingerprint', $this->session)) {
+            return ($this->session['fingerprint'] === $this->getFingerPrint());
         }
         return false;
     }
@@ -114,7 +132,8 @@ class SessionMemcached implements ISession  {
      */
     public function set ($key, $value) {
         if ($this->isAuthorized()) {
-            $_SESSION[$key] = $value;
+            $this->session[$key] = $value;
+            $this->mem->set($this->key, $this->session);
         }
     }
 
@@ -129,8 +148,9 @@ class SessionMemcached implements ISession  {
             setcookie(session_name(), '', -1, $ckData['path'], $ckData['domain'], $ckData['secure'], $ckData['httponly']);
         }
         // Erase the session and the session data.
-        $_SESSION = array();
         session_destroy();
+        $this->mem->delete($this->key);
+        $this->session = array();
     }
 
 
