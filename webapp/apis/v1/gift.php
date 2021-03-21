@@ -95,6 +95,7 @@ class gift extends ApiController {
                     'privacy' => eq('public')//,  'privacy' => like('%'.Session::get('id').'%')
                 )
             ), '"createdOn" desc');
+print_r($list);
             //'condition' => 'status = "active" and userId != "'.$userId.'" and (privacy = "public" or privacy like "%,'.$userId.',%")'.$userFilter,
             //$userFilter = $username ? ' and username like "'.$username.'%"' : '';
         }
