@@ -33,7 +33,6 @@ class auth extends ApiController {
      */
     public function post ($session, $params) {
         // Get input data.
-print_r($_SESSION);
         $email = $this->inputGet('email');
         $password = $this->inputGet('pwd');
         // Find an active user by email.
