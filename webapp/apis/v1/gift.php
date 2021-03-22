@@ -9,6 +9,8 @@ use domain\Gift as oGift;
  */
 class gift extends ApiController {
 
+    const IMG_DOMAIN = 'https://i.ibb.co';
+
     /**
      * Delete a gift.
      *
@@ -186,23 +188,24 @@ class gift extends ApiController {
         // Store the image.
         if ($image) {
             // Get the image name.
-            if (strrpos($image, '/' . APP) === 0) {
+            if (strpos($image, self::IMG_DOMAIN) === 0) {
                 // The image is already in the server.
-                $imgName = substr($image, strlen('/' . STATICS . '/imgs/gifts/'));
+                $imgName = substr($image, strrpos($image, '/') + 1);
             } else {
                 // Get a new image name.
-                $imgName = $session->get('name') . '_' . mt_rand() . '.' . $this->getImageFormat($image);
+                $imgName = $session->get('name') . '-' . mt_rand() . '.' . $this->getImageFormat($image);
             }
             // Get the image raw data and save it on the server.
             $data = $this->getImage($image);
-            file_put_contents(STATICS . '/imgs/gifts/' . $imgName, $data);
+            // file_put_contents(STATICS . '/imgs/gifts/' . $imgName, $data);
+            $this->storeImage($imgName, $data);
         }
         // Modify a gift.
         $gift->title = $title;
         $gift->description = $description;
         $gift->link = $link;
         $gift->privacy = $privacy;
-        $gift->image = '/'.STATICS.'/imgs/gifts/'.$imgName;
+        $gift->image = self::IMG_DOMAIN.$imgName;
         $gift->createdOn = date('Y-m-d H:i:s');
         // Store the gift.
         $giftRepo->select('title,description,link,privacy,image,createdOn')->modify($gift);
@@ -220,11 +223,9 @@ class gift extends ApiController {
      * @return string  Image raw data.
      */
     private function getImage($image) {
-        if (strrpos($image, 'http') === 0) {
+        if (strpos($image, self::IMG_DOMAIN) === 0) {
             // Get the image data from URL.
             $data = file_get_contents($image);
-        } else if (strrpos($image, '/'.APP.'/') === 0) {
-            $data = file_get_contents(substr($image, 1));
         } else {
             // Get the image data uploaded from browser.
             //$image = urldecode($image);
@@ -237,10 +238,8 @@ class gift extends ApiController {
     }
 
     private function getImageFormat($image) {
-        if (strrpos($image, 'http') === 0) {
+        if (strrpos($image, self::IMG_DOMAIN) === 0) {
             // Get the image format from a URL.
-            return substr($image, -(strlen($image) - strrpos($image, '.')));
-        } else if (strrpos($image, '/'.APP.'/') === 0) {
             return substr($image, -(strlen($image) - strrpos($image, '.')));
         } else {
             // Get the image format from data uploaded from browser.
@@ -250,4 +249,27 @@ class gift extends ApiController {
             return $format;
         }
     }
+
+    private function storeImage ($name, $data) {
+        $url = "https://api.imgbb.com/1/upload";
+        $fields = [
+            'name' => $name,
+            'key' => '0ac831068603484e426fda013b57e80e',
+            'image' => base64_encode($data)
+        ];
+        // url-ify the data for the POST.
+        $fields_string = http_build_query($fields);
+        // Open connection.
+        $ch = curl_init();
+        // Set the url, number of POST vars, POST data.
+        curl_setopt($ch,CURLOPT_URL, $url);
+        curl_setopt($ch,CURLOPT_POST, true);
+        curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
+        // So that curl_exec returns the contents of the cURL; rather than echoing it.
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER, true); 
+        // Execute post.
+        $result = curl_exec($ch);
+        echo $result;
+    }
+
 }
