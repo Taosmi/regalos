@@ -60,7 +60,6 @@ namespace runPHP\plugins {
         public function __construct ($dsn, $object, $pks = null) {
             try {
                 // Get the DSN connection parameters.
-                // list($resource, $user, $pwd) = explode(',', $dsn);
                 $db = parse_url($dsn);
                 // Get the PDO resource.
                 $start = microtime(true);

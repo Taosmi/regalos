@@ -185,8 +185,8 @@ class gift extends ApiController {
         if ($gift->userId != $session->get('id')) {
             return new Response(401, __('The gift is not available'));
         }
-print_r($image);
-print_r($description);
+var_dump($image);
+var_dump($description);
         // Store the image.
         if ($image) {
             // Get the image name.
