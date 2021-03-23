@@ -205,7 +205,7 @@ class gift extends ApiController {
         $gift->description = $description;
         $gift->link = $link;
         $gift->privacy = $privacy;
-        $gift->image = self::IMG_DOMAIN.$imgName;
+        $gift->image = $image ? self::IMG_DOMAIN.$imgName : null;
         $gift->createdOn = date('Y-m-d H:i:s');
         // Store the gift.
         $giftRepo->select('title,description,link,privacy,image,createdOn')->modify($gift);
