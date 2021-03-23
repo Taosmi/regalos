@@ -59,6 +59,8 @@ abstract class ApiController {
         // Get the body request input data.
         if ($request['mime'] === 'application/json' && $request['method'] != 'GET') {
             $bodyParams = json_decode(file_get_contents('php://input'), true);
+var_dump($_REQUEST);
+var_dump($bodyParams);
             if ($bodyParams) {
                 $this->input = array_merge($this->input, $bodyParams);
             }
