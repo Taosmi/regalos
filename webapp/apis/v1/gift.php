@@ -267,7 +267,7 @@ class gift extends ApiController {
         // So that curl_exec returns the contents of the cURL; rather than echoing it.
         curl_setopt($ch,CURLOPT_RETURNTRANSFER, true); 
         // Execute post.
-        $result = curl_exec($ch);
+        $result = json_decode(curl_exec($ch), true);
         return $result['data']['url'];
     }
 
