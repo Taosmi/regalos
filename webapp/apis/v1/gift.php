@@ -222,7 +222,7 @@ class gift extends ApiController {
      * @return string  Image raw data.
      */
     private function getImage($image) {
-        if (strpos($image, self::IMG_DOMAIN) === 0) {
+        if (strpos($image, 'http') === 0) {
             // Get the image data from URL.
             $data = file_get_contents($image);
         } else {
