@@ -21,13 +21,13 @@ var deleteGift = function () {
             method: 'POST',
             url: '/v1/gift',
             contentType: 'application/json; charset=UTF-8',
-            data: {
+            data: JSON.stringify({
                 title: $('#title').val(),
                 description: $('#description').val(),
                 link: $('#link').val(),
                 privacy: $('input[name=privacy]:checked').val(),
                 image: $('#loadImg').attr('data-urlimg') || $('#loadImg').attr('data-img')
-            },
+            }),
             success: function () {
                 document.location = '/shopList';
             },

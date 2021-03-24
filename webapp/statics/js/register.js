@@ -15,13 +15,13 @@ $(window).ready(function () {
             method: 'POST',
             url: '/v1/user',
             contentType: 'application/json; charset=UTF-8',
-            data: {
+            data: JSON.stringify({
                 name: $('#name').val(),
                 email: $('#email').val(),
                 password: $('#password').val(),
                 birthday: $('#year').val() + '-' + $('#month').val() + '-' + $('#day').val(),
                 policy: $('#policy').val() ? 'Y' : 'N'
-            },
+            }),
             success: function (data) {
                 $('#registerForm').replaceWith('<p id="welcome"><a href="/index">' + data.result + '</a></p>');
             },

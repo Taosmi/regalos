@@ -4,9 +4,9 @@ var loadGifts = function () {
         method: 'GET',
         contentType: 'application/json; charset=UTF-8',
         url: '/v1/gift',
-        data: {
+        data: JSON.stringify({
             username: $('#username').val()
-        },
+        }),
         success: function (data) {
             var splitData;
             if (data.num > 0) {

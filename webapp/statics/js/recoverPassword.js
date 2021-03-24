@@ -9,9 +9,9 @@ $(window).ready(function () {
             method: 'GET',
             url: '/v1/recover',
             contentType: 'application/json; charset=UTF-8',
-            data: {
+            data: JSON.stringify({
                 email: $('#email').val(),
-            },
+            }),
             success: function (data) {
                 $('#recoverForm').replaceWith('<h1><a href="/index">' + data.result + '</a></h1>');
             },

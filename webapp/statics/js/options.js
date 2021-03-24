@@ -5,13 +5,13 @@ var modifyUser= function (id) {
             method: 'PUT',
             url: '/v1/user/' + id,
             contentType: 'application/json; charset=UTF-8',
-            data: {
+            data: JSON.stringify({
                 name: $('#name').val(),
                 email: $('#email').val(),
                 birthday: $('#year').val() + '-' + $('#month').val() + '-' + $('#day').val(),
                 policy: $('#policy').prop('checked') ? 'Y' : 'N',
                 image: $('#loadAvatar').attr('data-avatar')
-            },
+            }),
             success: function () {
                 document.location = '/options';
             },

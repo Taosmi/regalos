@@ -9,9 +9,9 @@ $(window).ready(function () {
         method: 'GET',
         contentType: 'application/json; charset=UTF-8',
         url: '/v1/gift',
-        data: {
+        data: JSON.stringify({
             owner: 'me'
-        },
+        }),
         success: function (data) {
             if (data.num > 0) {
                 document.getElementById('info').setAttribute('style', 'display:none');
