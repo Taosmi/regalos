@@ -98,7 +98,8 @@ namespace runPHP\plugins {
         public function add ($item) {
             // Get the item properties.
             $objData = get_object_vars($item);
-            $keys = array_keys(array_filter($objData, static function($var) { return $var !== null; }));
+            $objData = array_filter($objData, static function($var) { return $var !== null; });
+            $keys = array_keys($objData);
             // Query time.
             $sql = 'INSERT INTO ' . $this->table . ' ("' . implode('","', $keys) . '") VALUES (:' . implode(',:', $keys) . ')';
             $this->query($sql, $objData);
