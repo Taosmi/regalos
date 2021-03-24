@@ -237,7 +237,7 @@ class gift extends ApiController {
     }
 
     private function getImageFormat($image) {
-        if (strrpos($image, self::IMG_DOMAIN) === 0) {
+        if (strrpos($image, 'http') === 0) {
             // Get the image format from a URL.
             return substr($image, -(strlen($image) - strrpos($image, '.')));
         } else {
