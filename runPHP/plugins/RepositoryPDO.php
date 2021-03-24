@@ -100,7 +100,7 @@ namespace runPHP\plugins {
             $objData = get_object_vars($item);
             $keys = array_keys($objData);
             // Query time.
-            $sql = 'INSERT INTO ' . $this->table . ' (' . implode('","', $keys) . ') VALUES (:' . implode(',:', $keys) . ')';
+            $sql = 'INSERT INTO ' . $this->table . ' ("' . implode('","', $keys) . '") VALUES (:' . implode(',:', $keys) . ')';
             $this->query($sql, $objData);
             // Update the item primary key if single before returning it.
 /*
