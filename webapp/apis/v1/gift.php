@@ -185,8 +185,6 @@ class gift extends ApiController {
         if ($gift->userId != $session->get('id')) {
             return new Response(401, __('The gift is not available'));
         }
-var_dump($image);
-var_dump($description);
         // Store the image.
         if ($image) {
             // Get the image name.
@@ -199,15 +197,14 @@ var_dump($description);
             }
             // Get the image raw data and save it on the server.
             $data = $this->getImage($image);
-            // file_put_contents(STATICS . '/imgs/gifts/' . $imgName, $data);
-            $this->storeImage($imgName, $data);
+            $imgURL = $this->storeImage($imgName, $data);
         }
         // Modify a gift.
         $gift->title = $title;
         $gift->description = $description;
         $gift->link = $link;
         $gift->privacy = $privacy;
-        $gift->image = $image ? self::IMG_DOMAIN.$imgName : null;
+        $gift->image = $image ? $imgURL : null;
         $gift->createdOn = date('Y-m-d H:i:s');
         // Store the gift.
         $giftRepo->select('title,description,link,privacy,image,createdOn')->modify($gift);
@@ -271,7 +268,7 @@ var_dump($description);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER, true); 
         // Execute post.
         $result = curl_exec($ch);
-        echo $result;
+        return $obj['data']['url'];
     }
 
 }
