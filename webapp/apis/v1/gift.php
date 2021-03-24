@@ -268,7 +268,7 @@ class gift extends ApiController {
         curl_setopt($ch,CURLOPT_RETURNTRANSFER, true); 
         // Execute post.
         $result = curl_exec($ch);
-        return $obj['data']['url'];
+        return $result['data']['url'];
     }
 
 }
