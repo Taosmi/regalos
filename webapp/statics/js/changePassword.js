@@ -2,18 +2,18 @@
 $(window).ready(function () {
 
     // Login form submit.
-    $('#resetForm').submit(function (event) {
+    $('#changeForm').submit(function (event) {
         event.preventDefault();
         // Send new password.
         $.ajax({
-            method: 'GET',
+            method: 'POST',
             url: '/v1/recover',
             contentType: 'application/json; charset=UTF-8',
-            data: {
-                email: $('#email').val(),
-            },
+            data: JSON.stringify({
+                password: $('#password').val(),
+            }),
             success: function (data) {
-                $('#recoverForm').replaceWith('<h1><a href="/index">' + data.result + '</a></h1>');
+                document.location = '/options';
             },
             error: function (data) {
                 alert(data.responseJSON.error.msg);

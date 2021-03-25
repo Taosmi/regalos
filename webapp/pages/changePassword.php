@@ -16,7 +16,7 @@
         <!-- Login form -->
         <section class="card recover">
             <p><? _e('Enter a new password. Please try to use a password with a enough sense of randomness that a little boy could not ever guess.') ?></p>
-            <form id="resetForm" method="get">
+            <form id="changeForm" method="get">
                 <fieldset>
                     <label for="password"><? _e('Password') ?></label>
                     <input type="text" id="password" class="fullsize" maxlength="100"/>

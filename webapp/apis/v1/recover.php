@@ -43,4 +43,22 @@ class recover extends ApiController {
         ));
     }
 
+    public function post ($session, $params) {
+        $id = $session->get('id');
+        $password = $this->inputGet('password');
+        // Check the user already exist.
+        $userRepo = $this->repository('domain\User');
+        $user = $userRepo->findOne(array(
+            'id' => eq($id),
+            'status' => eq('active')
+        ));
+        $user->password = $password;
+        // Store the user.
+        $userRepo->select('password')->modify($user);
+        // Return an Ok response.
+        return new Response(array(
+            'result' => 'ok'
+        ));
+    }
+
 }
