@@ -118,20 +118,47 @@ class user extends ApiController {
         $user->email = $email;
         $user->birthday = $birthday;
         $user->policy = $policy;
-        // Store the user.
-        $userRepo->select('name,email,birthday,policy')->modify($user);
         // Store the avatar.
         if ($image) {
-            list($mime, $data) = explode(';', $image);
-            list($type,) = explode('/', $mime);
-            list(, $data) = explode(',', $data);
-            if ($type === 'data:image') {
-                file_put_contents(STATICS . '/imgs/users/' . $id, base64_decode($data));
+            // Get the new image name.
+            if (strpos($image, self::IMG_DOMAIN) === -1) {
+                list($mime, $data) = explode(';', $image);
+                list($type,) = explode('/', $mime);
+                list(, $data) = explode(',', $data);
+                if ($type === 'data:image') {
+                    $imgURL = $this->storeImage('user_'.$id, $data);
+                    $user->image = $imgURL;
+                }
             }
         }
+        // Store the user.
+        $userRepo->select('name,email,birthday,policy,image')->modify($user);
         // Return an Ok response.
         return new Response(array(
             'result' => 'ok'
         ));
     }
+
+    private function storeImage ($name, $data) {
+        $url = "https://api.imgbb.com/1/upload";
+        $fields = [
+            'name' => $name,
+            'key' => '0ac831068603484e426fda013b57e80e',
+            'image' => $data)
+        ];
+        // url-ify the data for the POST.
+        $fields_string = http_build_query($fields);
+        // Open connection.
+        $ch = curl_init();
+        // Set the url, number of POST vars, POST data.
+        curl_setopt($ch,CURLOPT_URL, $url);
+        curl_setopt($ch,CURLOPT_POST, true);
+        curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
+        // So that curl_exec returns the contents of the cURL; rather than echoing it.
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER, true); 
+        // Execute post.
+        $result = json_decode(curl_exec($ch), true);
+        return $result['data']['url'];
+    }
+
 }
