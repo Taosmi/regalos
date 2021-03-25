@@ -19,9 +19,9 @@
             <form id="changeForm" method="get">
                 <fieldset>
                     <label for="password"><? _e('Password') ?></label>
-                    <input type="text" id="password" class="fullsize" maxlength="100"/>
+                    <input type="password" id="password" class="fullsize" maxlength="100"/>
                     <label for="repassword"><? _e('Repeat the password') ?></label>
-                    <input type="text" id="repassword" class="fullsize" maxlength="100"/>
+                    <input type="password" id="repassword" class="fullsize" maxlength="100"/>
                 </fieldset>
                 <fieldset>
                     <button type="submit" class="primary fullsize"><? _e('Change') ?></button>
