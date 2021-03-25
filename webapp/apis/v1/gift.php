@@ -133,13 +133,13 @@ class gift extends ApiController {
             // Get a name for the gift image and process the image raw data to a file on the server.
             $imgName = $session->get('name') . '_' . mt_rand() . '.' . $this->getImageFormat($image);
             $data = $this->getImage($image);
-            file_put_contents(STATICS . '/imgs/gifts/' . $imgName, $data);
+            $imgURL = $this->storeImage($imgName, $data);
         }
         // Create a gift.
         $gift = new oGift();
         $gift->title = $title;
         $gift->description = $description;
-        $gift->image = $image ? '/'.STATICS.'/imgs/gifts/'.$imgName : null;
+        $gift->image = $image ? $imgUrl : null;
         $gift->link = $link;
         $gift->privacy = $privacy;
         $gift->userId = $session->get('id');
@@ -193,7 +193,7 @@ class gift extends ApiController {
                 $imgName = substr($image, strrpos($image, '/') + 1);
             } else {
                 // Get a new image name.
-                $imgName = $session->get('name') . '-' . mt_rand() . '.' . $this->getImageFormat($image);
+                $imgName = $session->get('name') . '_' . mt_rand() . '.' . $this->getImageFormat($image);
             }
             // Get the image raw data and save it on the server.
             $data = $this->getImage($image);
@@ -237,7 +237,7 @@ class gift extends ApiController {
     }
 
     private function getImageFormat($image) {
-        if (strrpos($image, 'http') === 0) {
+        if (strpos($image, 'http') === 0) {
             // Get the image format from a URL.
             return substr($image, -(strlen($image) - strrpos($image, '.')));
         } else {
