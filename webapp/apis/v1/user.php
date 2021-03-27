@@ -128,6 +128,7 @@ class user extends ApiController {
             list(, $data) = explode(',', $data);
             if ($type === 'data:image') {
                 $user->image = $this->storeImage('Avatar-'.$id, $data);
+                $session->set('image', $user->image);
             }
         }
         // Store the user.
