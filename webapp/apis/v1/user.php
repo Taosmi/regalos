@@ -122,15 +122,12 @@ class user extends ApiController {
         $user->birthday = $birthday;
         $user->policy = $policy;
         // Store the avatar.
-        if ($image) {
-            // Get the new image name.
-            if (strpos($image, self::IMG_DOMAIN) === -1) {
-                list($mime, $data) = explode(';', $image);
-                list($type,) = explode('/', $mime);
-                list(, $data) = explode(',', $data);
-                if ($type === 'data:image') {
-                    $user->image = $this->storeImage('user_'.$id, $data);
-                }
+        if ($image && strpos($image, self::IMG_DOMAIN) === false) {
+            list($mime, $data) = explode(';', $image);
+            list($type,) = explode('/', $mime);
+            list(, $data) = explode(',', $data);
+            if ($type === 'data:image') {
+                $user->image = $this->storeImage('Avatar-'.$id, $data);
             }
         }
         // Store the user.
