@@ -52,6 +52,7 @@ class auth extends ApiController {
         $session->authorize();
         $session->set('id', $user->id);
         $session->set('name', $user->name);
+        $session->set('avatar', $user->image);
         // Return an Ok response.
         return new Response(array(
             'result' => 'ok'
