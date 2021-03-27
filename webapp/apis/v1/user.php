@@ -78,6 +78,8 @@ class user extends ApiController {
         $user = $userRepo->add($user);
         // Store the avatar.
         $data = file_get_contents(STATICS.'/imgs/user.png');
+var_dump(STATICS.'/imgs/user.png');
+var_dump($data);
         $user->image = $this->storeImage('Avatar_'.$user->id, $data);
         $userRepo->select('image')->modify($user);
         // Return a Ok response.
