@@ -77,8 +77,9 @@ class user extends ApiController {
         // Store the user.
         $user = $userRepo->add($user);
         // Store the avatar.
-        copy(STATICS.'/imgs/user.png', STATICS.'/imgs/users/'.$user->id);
-
+        $data = file_get_contents(STATICS.'/imgs/user.png');
+        $user->image = $this->storeImage('Avatar_'.$user->id, $data);
+        $userRepo->select('image')->modify($user);
         // Return a Ok response.
         return new Response(array(
             'result' => __('Welcome!')
@@ -126,8 +127,7 @@ class user extends ApiController {
                 list($type,) = explode('/', $mime);
                 list(, $data) = explode(',', $data);
                 if ($type === 'data:image') {
-                    $imgURL = $this->storeImage('user_'.$id, $data);
-                    $user->image = $imgURL;
+                    $user->image = $this->storeImage('user_'.$id, $data);
                 }
             }
         }
