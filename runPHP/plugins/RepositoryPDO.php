@@ -104,12 +104,10 @@ namespace runPHP\plugins {
             $sql = 'INSERT INTO ' . $this->table . ' ("' . implode('","', $keys) . '") VALUES (:' . implode(',:', $keys) . ')';
             $this->query($sql, $objData);
             // Update the item primary key if single before returning it.
-/*
             if (count($this->keys) === 1) {
                 $pk = current($this->keys);
                 $item->$pk = $this->pdo->lastInsertId();
             }
-*/
             return $item;
         }
 
