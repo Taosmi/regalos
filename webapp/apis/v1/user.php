@@ -9,6 +9,8 @@ use domain\User as oUser;
  */
 class user extends ApiController {
 
+    const IMG_DOMAIN = 'https://i.ibb.co';
+
     /**
      * Get a user profile. A user ID must by specified in the URL.
      *
