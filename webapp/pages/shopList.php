@@ -32,6 +32,7 @@
                     <p class="title">{title}</p>
                     <p class="desc">{description}</p>
                     <a href="/gift/{giftId}" class="button edit"><? _e('Edit') ?></a>
+                    <a href="" class="button edit"><? _e('Got it!') ?></a>
                     <p class="privacy">
                         <img src="/webapp/statics/imgs/{privacy}.png"/>
                         {privacy}
