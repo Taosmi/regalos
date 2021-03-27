@@ -144,7 +144,7 @@ class user extends ApiController {
         $fields = [
             'name' => $name,
             'key' => '0ac831068603484e426fda013b57e80e',
-            'image' => $data)
+            'image' => $data
         ];
         // url-ify the data for the POST.
         $fields_string = http_build_query($fields);
