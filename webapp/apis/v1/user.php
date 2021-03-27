@@ -158,7 +158,7 @@ class user extends ApiController {
         curl_setopt($ch,CURLOPT_RETURNTRANSFER, true); 
         // Execute post.
         $result = json_decode(curl_exec($ch), true);
-echo $result;
+var_dump($result);
         return $result['data']['url'];
     }
 
