@@ -105,7 +105,7 @@ class user extends ApiController {
         if ($id != $session->get('id')) {
             throw new RunException(400, __('The user is not available'));
         }
-        // Check the user already exist.
+        // Check the user exist.
         $userRepo = $this->repository('domain\User');
         $user = $userRepo->findOne(array(
             'id' => eq($id),
