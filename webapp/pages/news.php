@@ -27,8 +27,8 @@
                     </a>
                     <p class="user">{username}</p>
                     <p class="date">{createdOn}</p>
-                    <img class="gift" src="{!image}"/>
                     <img class="gotit" data-sup="{?status:active}" src="/webapp/statics/imgs/gotit.png" />
+                    <img class="gift" src="{!image}"/>
                     <p class="title">{title}</p>
                     <p class="desc">{description}</p>
                 </li>
