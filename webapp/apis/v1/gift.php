@@ -86,13 +86,13 @@ class gift extends ApiController {
         } else if ($owner) {
             // Get the gifts owned by the current user.
             $list = $giftRepo->find(array(
-                'status' => eq('active'),
+                'status' => neq('delete'),
                 'userId' => eq($session->get('id'))
             ));
         } else {
             // Get other users gifts that current user may see.
             $list = $giftRepo->find(array(
-                'status' => eq('active'),
+                'status' => neq('delete'),
                 'userId' => ne($session->get('id')),
                 'or' => array(
                     'privacy' => eq('public')//,  'privacy' => like('%'.Session::get('id').'%')
