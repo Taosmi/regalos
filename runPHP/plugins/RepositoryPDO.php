@@ -76,11 +76,6 @@ namespace runPHP\plugins {
                 if ($pks) {
                     // Get primary keys from argument.
                     $this->keys = explode(',', $pks);
-                } else {
-                    // Get primary keys querying the DB of the table.
-                    $pksResult = $this->query('SHOW KEYS FROM ' . $this->table);
-                    $pksResult->setFetchMode(PDO::FETCH_COLUMN, 4);
-                    $this->keys = $pksResult->fetchAll();
                 }
             } catch (PDOException $e) {
                 throw new RunException(500, __('The connection to the persistence has failed.', 'system'), array(
