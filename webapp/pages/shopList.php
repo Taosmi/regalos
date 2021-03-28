@@ -25,7 +25,7 @@
                     <figure>
                         <img class="gift" src="{!image}"/>
                     </figure>
-                    <img data-sup="{?status:gotit}" src="/webapp/statics/imgs/gotit.png" style="position: relative;width: 3.6%;top: -20px;left: 160px;float: right;">
+                    <img class="gotit" data-sup="{?status:gotit}" src="/webapp/statics/imgs/gotit.png">
                     <a href="{!link}" class="seenHere" target="_blank">
                         <? _e('Seen here') ?> <img src="/webapp/statics/imgs/link.png">
                     </a>
