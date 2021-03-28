@@ -154,11 +154,11 @@ li.gifts p.privacy img {
 	vertical-align: middle;
 }
 li.gifts img.gotit {
-    float: right;
-    left: 191px;
+    float: left;
+    left: 95%;
     position: relative;
-    top: -37px;
-    width: 8.6%;
+    top: -159px;
+    width: 90px;
 }
 
 /*    G I F T    */

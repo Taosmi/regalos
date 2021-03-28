@@ -25,7 +25,6 @@
                     <figure>
                         <img class="gift" src="{!image}"/>
                     </figure>
-                    <img class="gotit" data-sup="{?status:gotit}" src="/webapp/statics/imgs/gotit.png">
                     <a href="{!link}" class="seenHere" target="_blank">
                         <? _e('Seen here') ?> <img src="/webapp/statics/imgs/link.png">
                     </a>
@@ -38,6 +37,7 @@
                         <img src="/webapp/statics/imgs/{privacy}.png"/>
                         {privacy}
                     </p>
+                    <img class="gotit" data-sup="{?status:gotit}" src="/webapp/statics/imgs/gotit.png" />
                 </li>
             </ul>
         </section>
