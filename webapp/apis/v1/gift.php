@@ -65,6 +65,7 @@ class gift extends ApiController {
 
         // Get a gift repository.
         $giftRepo = $this->repository('domain\Gift');
+        $giftRepo->from('regalos.gifts');
 
         if ($id) {
             // Get a gift by ID.

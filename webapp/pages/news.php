@@ -47,8 +47,8 @@
             </ul>
             <ul class="threeCols">
                 <li id="giftTemplate3" class="news">
-                    <img class="user" src="{image}"/>
-                    <a href="{!link}" class="seenHere target="_blank">
+                    <img class="user" src="{avatar}"/>
+                    <a href="{!link}" class="seenHere" target="_blank">
                         <? _e('Seen here') ?> <img src="/webapp/statics/imgs/link.png">
                     </a>
                     <p class="user">{username}</p>
