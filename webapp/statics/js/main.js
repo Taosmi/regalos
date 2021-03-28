@@ -15,15 +15,15 @@ var removeSiblings = function (node) {
      * @param parent  A DOM node as a parent.
      * @param attr    An attribute to search by.
      */
-    removeChildByAttr = function (parent, attr) {
+    removeChildByAttr = function (parent, attr, value) {
         var node = parent.firstChild;
         while (node) {
-            if ((node.nodeType === 1) && node.hasAttribute(attr)) {
+            if ((node.nodeType === 1) && node.hasAttribute(attr) && node.getAttribute(attr) == value) {
                 node = node.nextSibling;
                 parent.removeChild(node.previousSibling);
             } else {
                 if (node.hasChildNodes()) {
-                    removeChildByAttr(node, attr);
+                    removeChildByAttr(node, attr, value);
                 }
                 node = node.nextSibling;
             }
@@ -60,7 +60,7 @@ var removeSiblings = function (node) {
                 return data[i][value] || '';
             });
             // Erase all the tags with the data-sup attribute.
-            removeChildByAttr(clone, 'data-sup');
+            removeChildByAttr(clone, 'data-sup', 'yes');
             fragment.appendChild(clone);
         }
         // Erase the old content preserving the template node.
