@@ -30,6 +30,7 @@
                     <img class="gift" src="{!image}"/>
                     <p class="title">{title}</p>
                     <p class="desc">{description}</p>
+                    <img class="gotit" data-sup="{?status:active}" src="/webapp/statics/imgs/gotit.png" />
                 </li>
             </ul>
             <ul class="threeCols">
