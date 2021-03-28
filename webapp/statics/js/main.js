@@ -45,8 +45,16 @@ var removeSiblings = function (node) {
             // Create a new node.
             clone = node.cloneNode(false);
             clone.removeAttribute('style');
-            clone.innerHTML = node.innerHTML.replace(/\{(!)?(\w+)\}/g, function (match, code, value) {
-                if (code && !data[i][value]) {
+            clone.innerHTML = node.innerHTML.replace(/\{([!\?])?([\w:]+)\}/g, function (match, code, value) {
+                if (code && code.substr(0, 1) == '?') {
+                    condition = value.split(':');
+                    result = eval('data[i]["' + condition[0] + '"]=="'+ condition[1] + '"');
+                    if (!result) {
+                        return 'yes';
+                    }
+                    return 'no';
+                }
+                if (code && (code.substr(0, 1) == '!') && !data[i][value]) {
                     return '" data-sup="yes';
                 }
                 return data[i][value] || '';

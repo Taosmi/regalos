@@ -25,6 +25,7 @@
                     <figure>
                         <img class="gift" src="{!image}"/>
                     </figure>
+                    <img data-sup="{?status:gotit}" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimg1.pnghut.com%2F18%2F14%2F9%2FK7AQfzz4Ri%2Fcheckbox-icon-design-flat-check-mark-cheque.jpg&amp;f=1&amp;nofb=1" style="position: relative;width: 3.6%;top: -20px;left: 160px;float: right;">
                     <a href="{!link}" class="seenHere" target="_blank">
                         <? _e('Seen here') ?> <img src="/webapp/statics/imgs/link.png">
                     </a>
