@@ -104,6 +104,13 @@ li.news p.desc {
 	padding: 0;
 	text-align: justify;
 }
+li.news img.gotit {
+    float: left;
+    left: 95%;
+    position: relative;
+    top: -159px;
+    width: 90px;
+}
 
 a.seenHere {
 	color: #888;
