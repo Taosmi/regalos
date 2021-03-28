@@ -105,11 +105,11 @@ li.news p.desc {
 	text-align: justify;
 }
 li.news img.gotit {
-    float: left;
-    left: 95%;
+    float: right;
+    left: 7%;
     position: relative;
-    top: -159px;
-    width: 90px;
+    top: -86px;
+    width: 100px;
 }
 
 a.seenHere {

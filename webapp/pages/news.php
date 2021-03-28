@@ -28,9 +28,9 @@
                     <p class="user">{username}</p>
                     <p class="date">{createdOn}</p>
                     <img class="gift" src="{!image}"/>
+                    <img class="gotit" data-sup="{?status:active}" src="/webapp/statics/imgs/gotit.png" />
                     <p class="title">{title}</p>
                     <p class="desc">{description}</p>
-                    <img class="gotit" data-sup="{?status:active}" src="/webapp/statics/imgs/gotit.png" />
                 </li>
             </ul>
             <ul class="threeCols">
