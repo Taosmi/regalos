@@ -66,6 +66,10 @@ section.register p#welcome {
 
 /*    N E W S    */
 
+li.news {
+    position: relative;
+}
+
 li.news img.user {
 	border-radius: 50%;
 	float: left;
@@ -161,11 +165,12 @@ li.gifts p.privacy img {
 	vertical-align: middle;
 }
 li.gifts img.gotit {
-    float: left;
-    left: 95%;
-    position: relative;
-    top: -159px;
-    width: 90px;
+    max-width: 100px;
+    min-width: 30px;
+    position: absolute;
+    right: -10px;
+    top: 40px;
+    width: 100px;
 }
 
 /*    G I F T    */
