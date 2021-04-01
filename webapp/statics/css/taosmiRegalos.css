@@ -109,10 +109,11 @@ li.news p.desc {
 	text-align: justify;
 }
 li.news img.gotit {
-    float: right;
-    left: 7%;
-    position: relative;
-    top: -86px;
+    max-width: 100px;
+    min-width: 30px;
+    position: absolute;
+    right: -10px;
+    top: 40px;
     width: 100px;
 }
 
